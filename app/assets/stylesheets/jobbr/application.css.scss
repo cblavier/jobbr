@@ -1,0 +1,79 @@
+@import 'bootstrap';
+@import 'font-awesome';
+
+#auto-refresh {
+  float: right;
+}
+
+.job-status {
+
+  margin-left: 15px;
+  font-size: 18px;
+
+  &.waiting {
+    color: orange;
+  }
+
+  &.running, &.success {
+    color: limegreen;
+  }
+  &.failure {
+    color: red;
+  }
+
+}
+
+.breadcrumb {
+
+  .job-status {
+    margin-left: 5px;
+    font-size: 15px;
+  }
+
+  .btn-toolbar {
+    float: right;
+    margin-top: -4px;
+    a {
+      line-height: 14px;
+      i {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.logs {
+  background-color: #424242;
+  color: white;
+  font-family: Monaco, 'Courier New';
+  height: 200px;
+  overflow: auto;
+
+  .kind, .date {
+    color: #AAAAAA;
+  }
+  .kind, .date {
+    &.error, &.fatal {
+      color: #FF8E8E;
+    }
+    &.warn {
+      color: orange;
+    }
+  }
+
+  &.large {
+    height: 600px
+  }
+
+}
+
+.table td {
+  padding-top: 14px;
+}
+
+.btn-toolbar {
+  margin: -5px 0 0;
+  i {
+    font-size: 14px;
+  }
+}

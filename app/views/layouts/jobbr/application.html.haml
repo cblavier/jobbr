@@ -1,0 +1,20 @@
+!!! XML
+!!!
+%html{ :xmlns => 'http://www.w3.org/1999/xhtml'  }
+  %head
+    %title JobbR
+
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'jobbr/application'
+    = javascript_include_tag 'jobbr/application'
+
+  %body
+    .navbar
+      .navbar-inner
+        %a.brand= t('.title')
+        %button.btn#auto-refresh{type: 'button', 'data-toggle' => 'button'}
+          %i.icon-refresh
+          = t('.auto_refresh')
+    #main.container
+      = yield

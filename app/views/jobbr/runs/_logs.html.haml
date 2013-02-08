@@ -1,0 +1,7 @@
+%h5= title
+.well.logs{class: size}
+  - run.messages.each do |msg|
+    %span.date{class: msg.kind}= "[#{msg.date.localtime.strftime('%H:%M:%S')}]"
+    %span.kind{class: msg.kind}= "[#{msg.kind}]"
+    %span.message= raw(msg.message)
+    %br

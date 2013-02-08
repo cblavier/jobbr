@@ -1,0 +1,39 @@
+en:
+
+  layouts:
+    jobbr:
+        application:
+          title: JobbR
+          auto_refresh: Auto-refresh
+
+  jobbr:
+
+    jobs:
+
+      index:
+        title: Job list
+        scheduled_jobs: Scheduled Jobs
+        delayed_jobs: Delayed Jobs
+
+      job_list:
+        status: Status
+        job_name: Name
+        last_run: Last runned at
+        average_run_time: Average run time
+        see_all_runs: See all runs
+        see_last_run: See last run
+
+      show:
+        status: Status
+        last_run: Last run
+        last_run_logs: Last run logs
+        duration: Duration
+        scheduling: "Scheduled every <strong>%{scheduling}</strong>"
+        average_run_time: "Average duration: <strong>%{run_time}</strong>"
+        see_run: See details for this run
+
+    scheduled_job_executions:
+      show:
+        run_time: "Run time: %{run_time}"
+        previous_run: "Previous run"
+        next_run: "Next run"

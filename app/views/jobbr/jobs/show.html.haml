@@ -1,0 +1,30 @@
+%ul.breadcrumb
+  %li
+    = link_to t('jobbr.jobs.index.title'), jobs_path
+    %span.divider /
+  %li.active= @job.name.humanize
+
+.well
+  - if @job.scheduled? && @job.class.every
+    %p= raw t('.scheduling', scheduling: display_scheduling(@job))
+  = raw t('.average_run_time', run_time: ChronicDuration.output(@job.average_run_time, format: :long))
+
+= render 'jobbr/runs/logs', run: @job.last_run, title: t('.last_run_logs'), size: 'small'
+
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th= t('.status')
+      %th= t('.last_run')
+      %th= t('.duration')
+  - @runs.each do |run|
+    %tr
+      %td
+        %i{'class' => status_icon_class(run.status)}
+      %td= l run.started_at.localtime
+      %td= ChronicDuration.output((run.finished_at - run.started_at).round(2)) rescue 'N/A'
+      %td
+        .btn-toolbar
+          .btn-group
+            = link_to job_run_path(@job, run), class: 'btn', title: t('.see_run') do
+              %i.icon-download
