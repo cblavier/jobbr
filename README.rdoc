@@ -1,3 +1,5 @@
 = Jobbr
 
+{<img src="https://secure.travis-ci.org/cblavier/jobbr.png?branch=master" />}[http://travis-ci.org/cblavier/jobbr]
+
 This project rocks and uses MIT-LICENSE.
