@@ -2,9 +2,9 @@ en:
 
   layouts:
     jobbr:
-        application:
-          title: JobbR
-          auto_refresh: Auto-refresh
+      application:
+        title: JobbR
+        auto_refresh: Auto-refresh
 
   jobbr:
 

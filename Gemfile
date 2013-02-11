@@ -8,10 +8,8 @@ gem 'mongoid', '~> 3.0'
 gem 'haml'
 gem 'chronic_duration'
 
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
 
 group :development do
   gem 'unicorn'
