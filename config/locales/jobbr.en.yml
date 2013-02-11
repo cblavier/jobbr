@@ -1,5 +1,9 @@
 en:
 
+  time:
+    formats:
+      default: "%d %b %Y %H:%M:%S"
+
   layouts:
     jobbr:
       application:
