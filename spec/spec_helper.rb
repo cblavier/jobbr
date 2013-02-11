@@ -12,7 +12,6 @@ Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each { |f| requi
 RSpec.configure do |config|
 
   config.mock_with :mocha
-  config.use_transactional_fixtures = false
 
   config.before(:suite) do
     DatabaseCleaner.orm = 'mongoid'
