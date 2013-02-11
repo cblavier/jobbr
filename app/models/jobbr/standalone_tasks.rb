@@ -14,7 +14,7 @@ module Jobbr
       dependencies = ['Jobbr::Job', "Jobbr::#{name.to_s.camelize}"]
 
       # load all the classes for the specific kind
-      list = Dir[File.join(File.dirname(__FILE__), '..', name.to_s.pluralize, '*.rb')].map do |file|
+      list = Dir[Rails.root.join('app', 'models', name.to_s.pluralize, '*.rb')].map do |file|
         require file
         klass = "#{name.to_s.pluralize.camelize}::#{File.basename(file, '.rb').camelize}".constantize
         dependencies << klass.name

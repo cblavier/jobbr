@@ -2,6 +2,7 @@ models_root = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ap
 require File.join(models_root, 'jobbr', 'standalone_tasks')
 
 namespace :jobbr do
+
   Jobbr::StandaloneTasks.all(:scheduled_job).each do |info|
     # dynamically create a rake task for each individual Jobbr::ScheduledJob
     desc info[:desc]

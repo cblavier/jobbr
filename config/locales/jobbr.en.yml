@@ -32,7 +32,7 @@ en:
         average_run_time: "Average duration: <strong>%{run_time}</strong>"
         see_run: See details for this run
 
-    scheduled_job_executions:
+    runs:
       show:
         run_time: "Run time: %{run_time}"
         previous_run: "Previous run"

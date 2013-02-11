@@ -1,3 +1,5 @@
+require 'jobbr/logger'
+
 module Jobbr
 
   class Job

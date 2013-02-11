@@ -1,3 +1,5 @@
+require "jobbr/mongoid"
+
 module Jobbr
 
   module Whenever

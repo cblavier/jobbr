@@ -14,7 +14,8 @@ $(document).ready ->
   scrollToBottom($('.logs'))
   $('a').pjax container: $mainContainer
 
-  $(document).on 'pjax:complete', -> scrollToBottom($('.logs'))
+  $(document).on 'pjax:complete', ->
+    scrollToBottom($('.logs'))
 
   interval = undefined
   autoRefreshInterval = 5000
