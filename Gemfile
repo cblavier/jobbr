@@ -8,9 +8,17 @@ gem 'mongoid', '~> 3.0'
 gem 'haml'
 gem 'chronic_duration'
 
-gem 'sass-rails'
-gem 'coffee-rails'
+group :assets do
+  gem 'sass-rails'
+  gem 'coffee-rails'
+end
 
 group :development do
-  gem 'thin'
+  gem 'unicorn'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'mocha'
+  gem 'database_cleaner'
 end

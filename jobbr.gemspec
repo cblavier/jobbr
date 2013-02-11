@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = "Jobbr provideds a convenient framework and UI to make your Cron jobs and Scheduled Jobs more manageable."
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- test/*`.split("\n")
+  s.test_files    = `git ls-files -- spec/*`.split("\n")
   s.require_paths = ["lib"]
 
   s.add_dependency "rails", "~> 3.2"
@@ -20,5 +20,6 @@ Gem::Specification.new do |s|
   s.add_dependency "whenever"
   s.add_dependency "chronic_duration"
 
-  s.add_development_dependency "sqlite3"
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'combustion', '~> 0.3.1'
 end
