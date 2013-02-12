@@ -7,8 +7,8 @@ It provides base classes to abstract creation and execution of such jobs and a u
 
 == Screenshots
 
-{<img src="http://cl.ly/image/3r320L101c3h" width='500'>}[http://cl.ly/image/3r320L101c3h]
-{<img src="http://cl.ly/image/21433N411G01" width='500'>}[http://cl.ly/image/21433N411G01]
+{<img src="http://f.cl.ly/items/0N0G3A3c2A1X2l2s3b3p/Capture%20d%E2%80%99%C3%A9cran%202013-02-12%20%C3%A0%2010.52.05.png" width='500'>}[http://cl.ly/image/3r320L101c3h]
+{<img src="http://cl.ly/image/21433N411G01/Capture%20d%E2%80%99%C3%A9cran%202013-02-12%20%C3%A0%2010.55.13.png" width='500'>}[http://cl.ly/image/21433N411G01]
 
 == Dependencies
 
