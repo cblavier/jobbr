@@ -1,0 +1,8 @@
+Description:
+    Generates a new delayed job in DelayedJobs namespace.
+
+Example:
+    rails generate delayed_job MySample
+
+    This will create:
+        Model: app/models/delayed_jobs/my_sample_job.rb

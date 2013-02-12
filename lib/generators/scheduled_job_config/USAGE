@@ -1,0 +1,8 @@
+Description:
+    Generate Whenever schedule.rb config file
+
+Example:
+    rails generate scheduled_job_config
+
+    This will create:
+        Config: config/schedule.rb

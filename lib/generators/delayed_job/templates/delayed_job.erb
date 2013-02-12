@@ -1,0 +1,11 @@
+module DelayedJobs
+
+  class <%=name.camelize%>Job < Jobbr::DelayedJob
+
+    def perform(params, run)
+      # put your job code here
+    end
+
+  end
+
+end

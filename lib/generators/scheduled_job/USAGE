@@ -1,0 +1,10 @@
+Description:
+    Generates a new scheduled job in ScheduledJobs namespace.
+    Will also create a Whenever configuration file.
+
+Example:
+    rails generate scheduled_job MySample
+
+    This will create:
+        Model: app/models/scheduled_jobs/my_sample_job.rb
+        Config: config/schedule.rb
