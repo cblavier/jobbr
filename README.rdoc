@@ -71,12 +71,8 @@ And then get job status like this:
 
 Jobbr also provides a controller to run and poll delayed_jobs :
 
-* Post on following url to run your job:
+* Post on following url to run your job: <tt>delayed_job_creation_path(DelayedJobs::DummyJob, { some_param: 37 })</tt>
 
-    delayed_job_creation_path(DelayedJobs::DummyJob, { some_param: 37 })
-
-* And then poll this url (using the id returned in previous post) to get your job status:
-
-   delayed_job_polling_path(run_id)
+* And then poll this url (using the id returned in previous post) to get your job status: <tt>delayed_job_polling_path(run_id)</tt>
 
 This project rocks and uses MIT-LICENSE.
