@@ -31,6 +31,13 @@ Then mount Jobbr engine to your `routes.rb` file.
 
 === Scheduled Jobs
 
+Use provided generators to create a first scheduled job
+
+    rails g jobbr:scheduled_job dummy
+
+It will create a namespaced model as a well as a Whenever configuration file.
+
+
 === Delayed Jobs
 
 This project rocks and uses MIT-LICENSE.
