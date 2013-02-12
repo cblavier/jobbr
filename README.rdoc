@@ -1,5 +1,23 @@
 = Jobbr
 
+Jobbr is a framework for supervising ysour Rails delayed jobs and scheduled jobs (think Cron).
+It provides base classes to abstract creation and execution of such jobs and a user interface to supervize jobs and read their logs.
+
 {<img src="https://secure.travis-ci.org/cblavier/jobbr.png?branch=master" />}[http://travis-ci.org/cblavier/jobbr]
+
+== Screenshots
+
+{<img src="http://cl.ly/image/3r320L101c3h" width='500'>}[http://cl.ly/image/3r320L101c3h]
+{<img src="http://cl.ly/image/21433N411G01" width='500'>}[http://cl.ly/image/21433N411G01]
+
+== Dependencies
+
+== Setup
+
+=== User interface
+
+=== Scheduled Jobs
+
+=== Delayed Jobs
 
 This project rocks and uses MIT-LICENSE.
