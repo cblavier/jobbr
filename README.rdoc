@@ -33,10 +33,19 @@ Then mount Jobbr engine to your `routes.rb` file.
 
 Use provided generators to create a first scheduled job
 
-    rails g jobbr:scheduled_job dummy
+    $> rails g jobbr:scheduled_job dummy
 
-It will create a namespaced model as a well as a Whenever configuration file.
+It will create a namespaced model as a well as a Whenever configuration file. 
 
+Provided you fill in description and scheduling attributes in the model, you will be able to see it in rake tasks:
+
+    $> rake -T | grep jobbr
+    rake jobbr:dummy_job  # A dummy Job
+
+And to see it in your crontab preview:
+
+    $> whenever
+    30 5 * * * /bin/bash -l -c 'cd /Users/cblavier/code/my_app && RAILS_ENV=production bundle exec rake jobbr:dummy_job >> /Users/cblavier/code/my_app/log/cron.log 2>&1'
 
 === Delayed Jobs
 
