@@ -1,6 +1,7 @@
 = Jobbr
 
 Jobbr is a Rails engine for supervising your delayed jobs and scheduled jobs (think Cron).
+
 It provides a framework to abstract creation and execution of such jobs and a user interface to supervise jobs and read their logs.
 
 {<img src="https://secure.travis-ci.org/cblavier/jobbr.png?branch=master" />}[http://travis-ci.org/cblavier/jobbr]
