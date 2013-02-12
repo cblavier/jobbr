@@ -49,4 +49,34 @@ And to see it in your crontab preview:
 
 === Delayed Jobs
 
+Use generators to get a new job model:
+
+    $> rails g jobbr:delayed_job dummy
+
+You will get a new model with a perform method. Perform parameters are:
+
+* params: is a hash of parameters for your job.
+* run: is the object that will be persisted (and polled) for this job execution. Your delayed job can use it to provide progress information (to display a progress bar) and a final result.
+
+    run.progress = 100
+    run.result = 'my job result'
+
+You can now run your delayed job as following:
+
+    run_id = DelayedJobs::DummyJob.run_delayed(some_param: 37)
+
+And then get job status like this:
+    
+    Jobbr::Run.find(run_id).status # returns :waiting / :running / :failure / :success
+
+Jobbr also provides a controller to run and poll delayed_jobs :
+
+* Post on following url to run your job:
+
+    delayed_job_creation_path(DelayedJobs::DummyJob, { some_param: 37 })
+
+* And then poll this url (using the id returned in previous post) to get your job status:
+
+   delayed_job_polling_path(run_id)
+
 This project rocks and uses MIT-LICENSE.
