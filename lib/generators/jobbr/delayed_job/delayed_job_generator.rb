@@ -1,4 +1,4 @@
-class DelayedJobGenerator < Rails::Generators::NamedBase
+class Jobbr::DelayedJobGenerator < Rails::Generators::NamedBase
 
   source_root File.expand_path('../templates', __FILE__)
 
