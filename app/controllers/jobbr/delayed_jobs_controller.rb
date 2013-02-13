@@ -1,8 +1,6 @@
-require 'enginedemo/application_controller'
-
 module Jobbr
 
-  class DelayedJobsController < ApplicationController
+  class DelayedJobsController < Jobbr::ApplicationController
 
     def create
       @job = DelayedJob.run_delayed_by_name(params[:job_name], params)

@@ -1,8 +1,6 @@
-require 'jobbr/application_controller'
-
 module Jobbr
 
-  class JobsController < ApplicationController
+  class JobsController < Jobbr::ApplicationController
 
     def index
       @scheduled_jobs = Jobbr::ScheduledJob.all

@@ -1,8 +1,6 @@
-require 'jobbr/application_controller'
-
 module Jobbr
 
-  class RunsController < ApplicationController
+  class RunsController < Jobbr::ApplicationController
 
     def show
       @job = Job.by_name(params[:job_id]).first
