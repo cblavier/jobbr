@@ -1,3 +1,5 @@
+require 'enginedemo/application_controller'
+
 module Jobbr
 
   class DelayedJobsController < ApplicationController
