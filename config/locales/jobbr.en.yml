@@ -22,7 +22,7 @@ en:
       job_list:
         status: Status
         job_name: Name
-        last_run: Last runned at
+        last_run: Last ran at
         average_run_time: Average run time
         see_all_runs: See all runs
         see_last_run: See last run

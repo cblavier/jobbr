@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jobbr (1.0.1)
+    jobbr (1.0.2)
       chronic_duration
       mongoid (~> 3.0)
       rails (~> 3.2)

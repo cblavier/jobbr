@@ -12,7 +12,7 @@ module Jobbr
     end
 
     def layout_by_resource
-      request.headers['X-PJAX'] ? false : 'jobbr/application'
+      request.headers['X-PJAX'] ? false : 'jobbr/jobbr'
     end
 
   end
