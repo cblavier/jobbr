@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2"
   s.add_dependency "mongoid", "~> 3.0"
+  s.add_dependency "delayed_job_mongoid"
   s.add_dependency "whenever"
   s.add_dependency "chronic_duration"
 
