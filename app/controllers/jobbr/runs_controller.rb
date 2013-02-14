@@ -4,7 +4,7 @@ module Jobbr
 
     def show
       @job = Job.by_name(params[:job_id]).first
-      @run = @job.runs.where(id: params[:id]).unscoped.first
+      @run = @job.runs.unscoped.where(id: params[:id]).first
     end
 
   end
