@@ -83,7 +83,7 @@ module Jobbr
       end
 
       LoggingJob.run
-      last_job_run = ScheduledJob.last.runs.last
+      last_job_run = ScheduledJob.last.runs.unscoped.last
       last_job_run.should have(2).log_messages
       last_job_run.log_messages.first.kind.should be :debug
       last_job_run.log_messages.first.message.should == 'foo'

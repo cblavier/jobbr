@@ -10,6 +10,7 @@ module Jobbr
     def show
       @job = Job.by_name(params[:id]).first
       @runs = Run.for_job(@job)
+      @last_run = Run.unscoped.for_job(@job).first
     end
 
   end

@@ -14,9 +14,12 @@ module Jobbr
     belongs_to   :job
     embeds_many  :log_messages, class_name: 'Jobbr::LogMessage'
 
+    index(job_id: 1)
     index(job_id: 1, started_at: -1)
 
-    scope :for_job, ->(job) { Run.where(job_id: job.id).order_by(started_at: -1) }
+    scope :for_job, ->(job) { Jobbr::Run.where(job_id: job.id).order_by(started_at: -1) }
+
+    default_scope -> { without(:log_messages)}
 
     def run_time
       @run_time ||= if finished_at && started_at

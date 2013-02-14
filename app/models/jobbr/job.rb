@@ -34,6 +34,7 @@ module Jobbr
     def run(job_run = nil, params = {})
       if job_run
         job_run.status = :running
+        job_run.started_at = Time.now
         job_run.save!
       else
         job_run = Run.create(status: :running, started_at: Time.now, job: self)

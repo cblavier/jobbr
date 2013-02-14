@@ -9,7 +9,7 @@
     %p= raw t('.scheduling', scheduling: display_scheduling(@job))
   = raw t('.average_run_time', run_time: ChronicDuration.output(@job.average_run_time, format: :long))
 
-= render 'jobbr/runs/logs', run: @job.last_run, title: t('.last_run_logs'), size: 'small'
+= render 'jobbr/runs/logs', run: @last_run, title: t('.last_run_logs'), size: 'small'
 
 %table.table.table-striped.table-hover
   %thead
