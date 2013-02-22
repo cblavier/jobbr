@@ -12,6 +12,7 @@ module Jobbr
     end
 
     def self.run_delayed(params, delayed = true)
+      delayed = delayed && !Rails.env.test?
       job = instance
       job_run = Run.create(status: :waiting, started_at: Time.now, job: job)
       if delayed
@@ -23,6 +24,7 @@ module Jobbr
     end
 
     def self.run_delayed_by_name(job_class_name, params, delayed = true)
+      delayed = delayed && !Rails.env.test?
       job = instance(job_class_name)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: job)
       if delayed
