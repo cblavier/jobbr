@@ -51,6 +51,9 @@ module Jobbr
       old_logger = Rails.logger
       Rails.logger = Jobbr::Logger.new(Rails.logger, job_run)
 
+      handle_process_interruption(job_run, 'TERM')
+      handle_process_interruption(job_run, 'INT')
+
       begin
         if self.delayed?
           perform(params, job_run)
@@ -65,6 +68,15 @@ module Jobbr
         raise e
       ensure
         Rails.logger = old_logger
+        job_run.finished_at = Time.now
+        job_run.save!
+      end
+    end
+
+    def handle_process_interruption(job_run, signal)
+      Signal.trap(signal) do
+        job_run.status = :failure
+        logger.error("Job interrupted by a #{signal} signal")
         job_run.finished_at = Time.now
         job_run.save!
       end

@@ -35,6 +35,15 @@ module Jobbr
       job_run
     end
 
+    ## Delayed Job callbacks
+    def error(job, exception)
+      puts 'JOBBR ERROR'
+    end
+
+    def failure
+      puts 'JOBBR FAILURE'
+    end
+
   end
 
 end
