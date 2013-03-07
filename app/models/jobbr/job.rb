@@ -76,7 +76,7 @@ module Jobbr
     def handle_process_interruption(job_run, signal)
       Signal.trap(signal) do
         job_run.status = :failure
-        logger.error("Job interrupted by a #{signal} signal")
+        Rails.logger.error("Job interrupted by a #{signal} signal")
         job_run.finished_at = Time.now
         job_run.save!
       end
