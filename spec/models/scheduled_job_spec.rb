@@ -74,6 +74,11 @@ module Jobbr
       job_run.finished_at.should_not be_nil
     end
 
+    it 'sets the progress to 100% at the end' do
+      TestJob.run
+      TestJob.last.runs.last.progress.should be 100
+    end
+
     it 'creates log messages when logging' do
       class LoggingJob < ScheduledJob
         def perform

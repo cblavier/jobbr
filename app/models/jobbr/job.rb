@@ -61,6 +61,7 @@ module Jobbr
           perform
         end
         job_run.status = :success
+        job_run.write_attribute(:progress, 100)
       rescue Exception => e
         job_run.status = :failure
         logger.error(e.message)
