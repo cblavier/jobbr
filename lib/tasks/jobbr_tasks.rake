@@ -11,4 +11,10 @@ namespace :jobbr do
       info[:klass_name].constantize.run
     end
   end
+
+  desc 'Mark all running job as failed.'
+  task :sweep_running_jobs => :environment do
+    Jobbr::Run.where(status: :running).update_all(status: :failed)
+  end
+
 end
