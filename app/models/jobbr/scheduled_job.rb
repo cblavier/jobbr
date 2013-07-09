@@ -15,6 +15,20 @@ module Jobbr
       @every
     end
 
+    # heroku frequency can be :minutely, :hourly or :daily
+    def self.heroku_run(frequency, options = {})
+      @heroku_frequency = frequency
+      @heroku_priority = options[:priority] || 0
+    end
+
+    def self.heroku_frequency
+      @heroku_frequency
+    end
+
+    def self.heroku_priority
+      @heroku_priority
+    end
+
     def self.task_name(with_namespace = false)
       task_name = name.demodulize.underscore
       if with_namespace

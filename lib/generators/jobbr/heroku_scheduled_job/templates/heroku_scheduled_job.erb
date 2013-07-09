@@ -1,0 +1,15 @@
+module ScheduledJobs
+
+  class <%=name.camelize%>Job < Jobbr::ScheduledJob
+
+    # description 'Describe your job here'
+
+    # heroku_run :daily, priority: 0
+
+    def perform
+      # put your job code here
+    end
+
+  end
+
+end

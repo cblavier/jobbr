@@ -36,7 +36,7 @@ Use provided generators to create a first scheduled job
 
     $> rails g jobbr:scheduled_job dummy
 
-It will create a namespaced model as a well as a Whenever configuration file. 
+It will create a namespaced model as a well as a Whenever configuration file.
 
 Provided you fill in description and scheduling attributes in the model, you will be able to see it in rake tasks:
 
@@ -47,6 +47,20 @@ And to see it in your crontab preview:
 
     $> whenever
     30 5 * * * /bin/bash -l -c 'cd /Users/cblavier/code/my_app && RAILS_ENV=production bundle exec rake jobbr:dummy_job >> /Users/cblavier/code/my_app/log/cron.log 2>&1'
+
+=== Heroku Scheduled Jobs
+
+You can also use Heroku Scheduler to run jobs. Unfortunately Heroku does not provide Cron-scheduling, but let you run jobs every 10 minutes, every hour or every day.
+
+Jobbr provides you with 3 tasks `jobbr:heroku:minutely`, `jobbr:heroku:hourly` and `jobbr:heroku:daily`, that will run any ScheduledJob with `heroku_run` directive.
+
+Run following generator to create an heroku scheduled job
+
+    $> rails g jobbr:heroku_scheduled_job dummy_heroku
+
+Then you will need to manually add jobs to the Heroku scheduler console
+
+{<img src="http://cl.ly/image/2N1T1l1w2c28/Capture%20d%E2%80%99%C3%A9cran%202013-07-09%20%C3%A0%2022.18.40.png" width='400'>}[http://cl.ly/image/2N1T1l1w2c28]
 
 === Delayed Jobs
 
@@ -67,7 +81,7 @@ You can now run your delayed job as following:
     run_id = DelayedJobs::DummyJob.run_delayed(some_param: 37)
 
 And then get job status like this:
-    
+
     Jobbr::Run.find(run_id).status # returns :waiting / :running / :failure / :success
 
 Jobbr also provides a controller to run and poll delayed_jobs :
