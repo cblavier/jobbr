@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    jobbr (1.1.1)
+    jobbr (1.1.2)
       chronic_duration
       delayed_job_mongoid
       mongoid (~> 3.0)
