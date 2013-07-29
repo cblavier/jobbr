@@ -20,6 +20,7 @@ namespace :jobbr do
     end
 
     def run_heroku_scheduled_classes(frequency)
+      require "jobbr/job"
       Jobbr::Mongoid.models(Jobbr::ScheduledJob).select{|c| c.heroku_frequency == frequency }.sort{|a,b| b.heroku_priority <=> a.heroku_priority}.each(&:run)
     end
 
