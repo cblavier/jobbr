@@ -1,8 +1,8 @@
-class Jobbr::ScheduledJob < Job
+class Jobbr::ScheduledJob < Jobbr::Job
 
   field :scheduled, type: Boolean, default: true
 
-  default_scope ->{ Job.where(scheduled: true, :_type.ne => nil) }
+  default_scope ->{ Jobbr::Job.where(scheduled: true, :_type.ne => nil) }
 
   def perform
     raise NotImplementedError.new :message => 'Must be implemented'
