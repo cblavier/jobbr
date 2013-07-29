@@ -20,20 +20,26 @@ namespace :jobbr do
 
   namespace :heroku do
 
+    desc 'Run all minutely Heroku jobs'
     task :minutely => :environment do
-      heroku_scheduled_classes(:minutely).each(&:run)
+      run_heroku_scheduled_classes(:minutely)
     end
 
+    desc 'Run all hourly Heroku jobs'
     task :hourly => :environment do
-      heroku_scheduled_classes(:hourly).each(&:run)
+      run_heroku_scheduled_classes(:hourly)
     end
 
+    desc 'Run all daily Heroku jobs'
     task :daily => :environment do
-      heroku_scheduled_classes(:daily).each(&:run)
+      run_heroku_scheduled_classes(:daily)
     end
 
-    def heroku_scheduled_classes(frequency)
-      Jobbr::Mongoid.models(Jobbr::ScheduledJob).select{|c| c.heroku_frequency == frequency }.sort{|a,b| b.heroku_priority <=> a.heroku_priority}
+    def run_heroku_scheduled_classes(frequency)
+      Jobbr::StandaloneTasks.all(:scheduled_job).select{|c| c[:heroku_frequency] == frequency }.sort{|a,b| b[:heroku_priority] <=> a[:heroku_priority]}.each do |info|
+        info[:dependencies].each { |lib| load lib }
+        info[:klass_name].constantize.run
+      end
     end
 
   end

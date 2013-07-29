@@ -19,9 +19,11 @@ module Jobbr
         klass = "#{name.to_s.pluralize.camelize}::#{File.basename(file, '.rb').camelize}".constantize
         dependencies << klass.name
         {
-          name:         klass.task_name.to_sym,
-          desc:         klass.description,
-          klass_name:   klass.name,
+          name:             klass.task_name.to_sym,
+          desc:             klass.description,
+          klass_name:       klass.name,
+          heroku_frequency: klass.heroku_frequency,
+          heroku_priority:  klass.heroku_priority,
           dependencies: (dependencies[0..1] + [klass.name]).map { |n| "#{n.underscore}.rb" }
         }
       end
