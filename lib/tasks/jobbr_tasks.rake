@@ -1,7 +1,7 @@
-unless ENV['heroku']
+unless ENV['HEROKU']
 
   models_root = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'app', 'models'))
-  require File.join(models_root, 'jobbr', 'standalone_tasks'
+  require File.join(models_root, 'jobbr', 'standalone_tasks')
 
   namespace :jobbr do
 
@@ -22,3 +22,4 @@ unless ENV['heroku']
   end
 
 end
+
