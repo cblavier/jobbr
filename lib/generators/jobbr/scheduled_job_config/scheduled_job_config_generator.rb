@@ -3,6 +3,7 @@ class Jobbr::ScheduledJobConfigGenerator < Rails::Generators::Base
 
   def copy_config_file
     copy_file "schedule.rb", "config/schedule.rb"
+    generate 'jobbr:initializer'
   end
 
 end

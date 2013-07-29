@@ -12,6 +12,7 @@ PATH
     jobbr (1.1.2)
       chronic_duration
       delayed_job_mongoid
+      haml
       mongoid (~> 3.0)
       rails (~> 3.2)
       whenever

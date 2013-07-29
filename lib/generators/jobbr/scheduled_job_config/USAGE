@@ -6,3 +6,4 @@ Example:
 
     This will create:
         Config: config/schedule.rb
+        Config: config/initializers/jobbr.rb
