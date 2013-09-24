@@ -8,6 +8,4 @@ Jobbr::Engine.routes.draw do
 
   resources :delayed_jobs
 
-  mount Jobbr::Engine => "/jobbr"
-
 end
