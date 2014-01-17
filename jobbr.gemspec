@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- spec/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency "rails", "~> 3.2"
+  s.add_dependency "rails"
   s.add_dependency "mongoid", "~> 3.0"
   s.add_dependency "delayed_job_mongoid"
   s.add_dependency "whenever"
