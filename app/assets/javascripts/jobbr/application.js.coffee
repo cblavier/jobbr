@@ -1,7 +1,7 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery-pjax
-#= require bootstrap
+#= require jobbr/jquery-pjax
+#= require jobbr/bootstrap
 #= require_self
 
 scrollToBottom = ($container) ->
