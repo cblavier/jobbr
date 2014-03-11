@@ -11,7 +11,7 @@ module Jobbr
 
     has_many :runs, class_name: 'Jobbr::Run', dependent: :destroy
 
-    scope :by_name, ->(name) { where(_type: /.*#{name.underscore.camelize}/) }
+    scope :by_name, ->(name) { where(_type: /.*#{name.underscore.camelize}/i) }
 
     def self.instance(instance_type = nil)
       if instance_type
