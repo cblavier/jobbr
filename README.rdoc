@@ -1,6 +1,7 @@
 = Jobbr
 
 Jobbr is a Rails engine for supervising your delayed jobs and scheduled jobs (think Cron).
+Delayed jobs can either be running with delayed_job_mongoid or sidekiq.
 
 It provides a framework to abstract creation and execution of such jobs and a user interface to supervise jobs and read their logs.
 
@@ -67,6 +68,8 @@ You also need to add an environment variable to let Jobbr know it's running on H
     heroku config:add HEROKU=true
 
 === Delayed Jobs
+
+Add delayed_job_mongoid or sidekiq + sidekiq-delay to your Gemfile, and according backend will be used.
 
 Use generators to get a new job model:
 

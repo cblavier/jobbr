@@ -4,8 +4,8 @@ gemspec
 
 gem 'jquery-rails'
 gem 'whenever'
-gem 'mongoid'
-gem 'delayed_job_mongoid', github: 'asavartsov/delayed_job_mongoid'
+gem 'mongoid', '~> 3.0'
+
 gem 'haml'
 gem 'chronic_duration'
 
@@ -20,4 +20,6 @@ group :test do
   gem 'rspec-rails'
   gem 'mocha'
   gem 'database_cleaner'
+  gem 'delayed_job_mongoid'
+  gem 'sidekiq'
 end

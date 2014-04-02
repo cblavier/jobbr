@@ -14,11 +14,12 @@ module Jobbr
     def self.run_delayed(params, delayed = true)
       delayed = delayed && !Rails.env.test?
       job = instance
+      job.class.send(:include, Sidekiq::Delay) if sidekiq_available?
       job_run = Run.create(status: :waiting, started_at: Time.now, job: job)
       if delayed
-        job.delay.run(job_run, params)
+        job.delay.run(job_run.id, params)
       else
-        job.run(job_run, params)
+        job.run(job_run.id, params)
       end
       job_run
     end
@@ -26,11 +27,12 @@ module Jobbr
     def self.run_delayed_by_name(job_class_name, params, delayed = true)
       delayed = delayed && !Rails.env.test?
       job = instance(job_class_name)
+      job.class.send(:include, Sidekiq::Delay) if sidekiq_available?
       job_run = Run.create(status: :waiting, started_at: Time.now, job: job)
       if delayed
-        job.delay.run(job_run, params)
+        job.delay.run(job_run.id, params)
       else
-        job.run(job_run, params)
+        job.run(job_run.id, params)
       end
       job_run
     end
@@ -42,6 +44,13 @@ module Jobbr
 
     def failure
       puts 'JOBBR FAILURE'
+    end
+
+    def self.sidekiq_available?
+      Object.const_get('Sidekiq::Delay')
+      true
+    rescue
+      false
     end
 
   end
