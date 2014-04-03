@@ -7,7 +7,7 @@ module Jobbr
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    MAX_RUN_PER_JOB = 50
+    MAX_RUN_PER_JOB = 500
 
     has_many :runs, class_name: 'Jobbr::Run', dependent: :destroy
 
