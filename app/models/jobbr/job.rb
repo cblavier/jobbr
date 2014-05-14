@@ -34,7 +34,7 @@ module Jobbr
     def run(job_run_id = nil, params = {})
       job_run = nil
       if job_run_id
-        job_run = Run.find(job_run_id)
+        job_run = Run.unscoped.find(job_run_id)
         job_run.status = :running
         job_run.started_at = Time.now
         job_run.save!

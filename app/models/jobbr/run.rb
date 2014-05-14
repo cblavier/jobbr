@@ -19,7 +19,7 @@ module Jobbr
 
     scope :for_job, ->(job) { Jobbr::Run.where(job_id: job.id).order_by(started_at: -1) }
 
-    default_scope -> { without(:log_messages)}
+    #default_scope -> { without(:log_messages)}
 
     def run_time
       @run_time ||= if finished_at && started_at

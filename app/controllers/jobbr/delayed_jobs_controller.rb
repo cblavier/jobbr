@@ -4,7 +4,7 @@ module Jobbr
 
     def create
       @job = DelayedJob.run_delayed_by_name(params[:job_name], params)
-      render json: { id: @job.id }
+      render json: { id: @job.id.to_s }
     end
 
     def show
