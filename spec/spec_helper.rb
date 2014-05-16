@@ -1,7 +1,8 @@
+ENV['RAILS_ENV'] ||= 'test'
+
+ENV['CODECLIMATE_REPO_TOKEN'] ||= 'edafaf863fa93aff340625ec4ac8d70244456849256d0b4b16383ca0a76a11ec'
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
-
-ENV['RAILS_ENV'] ||= 'test'
 
 require File.join(File.dirname(__FILE__), 'dummy', 'config', 'environment.rb')
 require 'rspec/rails'
