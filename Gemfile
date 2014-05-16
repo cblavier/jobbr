@@ -25,5 +25,4 @@ group :test do
   gem 'rspec-rails'
   gem 'mocha'
   gem 'database_cleaner'
-  gem 'sidekiq'
 end
