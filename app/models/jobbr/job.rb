@@ -34,7 +34,7 @@ module Jobbr
     end
 
     def self.run
-      instance.run
+      instance.inner_run
     end
 
     def self.description(desc = nil)
@@ -54,7 +54,7 @@ module Jobbr
       all.count
     end
 
-    def run(job_run_id = nil, params = {})
+    def inner_run(job_run_id = nil, params = {})
       job_run = nil
       if job_run_id
         job_run = Run[job_run_id]
