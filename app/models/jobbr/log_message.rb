@@ -1,14 +1,15 @@
 module Jobbr
 
-  class LogMessage
+  class LogMessage < ::Ohm::Model
 
-    include Mongoid::Document
+    include ::Ohm::Timestamps
+    include ::Ohm::DataTypes
 
-    field :message,  type: String
-    field :kind,     type: Symbol
-    field :date,     type: Time
+    attribute :kind,    Type::Symbol
+    attribute :date,    Type::Time
+    attribute :message
 
-    embedded_in :run
+    reference  :run, 'Jobbr::Run'
 
   end
 

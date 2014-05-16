@@ -1,10 +1,24 @@
+GIT
+  remote: git://github.com/cblavier/sidekiq-delay.git
+  revision: 4de7452af436fa491a8e216b6f5d09ab4dec85eb
+  specs:
+    sidekiq-delay (1.0.4)
+      activesupport (>= 3.2)
+      sidekiq
+
+GIT
+  remote: git://github.com/cyx/ohm-contrib.git
+  revision: c9c0887d72dde6fd768c381285aec391eb8818a8
+  specs:
+    ohm-contrib (2.0.0)
+      ohm (~> 2.0.0)
+
 PATH
   remote: .
   specs:
     jobbr (1.1.5)
       chronic_duration
       haml
-      mongoid
       rails
       whenever
 
@@ -57,17 +71,13 @@ GEM
       thor (>= 0.14.6)
     connection_pool (2.0.0)
     database_cleaner (1.2.0)
-    delayed_job (3.0.5)
-      activesupport (~> 3.0)
-    delayed_job_mongoid (2.0.0)
-      delayed_job (~> 3.0)
-      mongoid (~> 3.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
     haml (4.0.5)
       tilt
     hike (1.2.3)
+    hiredis (0.5.2)
     i18n (0.6.9)
     journey (1.0.4)
     jquery-rails (3.1.0)
@@ -82,15 +92,14 @@ GEM
     mime-types (1.25.1)
     mocha (1.0.0)
       metaclass (~> 0.0.1)
-    mongoid (3.1.6)
-      activemodel (~> 3.2)
-      moped (~> 1.4)
-      origin (~> 1.0)
-      tzinfo (~> 0.3.29)
-    moped (1.5.2)
+    msgpack (0.5.8)
     multi_json (1.9.2)
+    nido (0.0.1)
     numerizer (0.1.1)
-    origin (1.1.0)
+    ohm (2.0.0)
+      msgpack
+      nido
+      redic
     polyglot (0.3.4)
     rack (1.4.5)
     rack-cache (1.2)
@@ -118,6 +127,8 @@ GEM
     rake (10.2.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    redic (1.1.1)
+      hiredis
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -173,15 +184,17 @@ DEPENDENCIES
   coffee-rails
   combustion (~> 0.3.1)
   database_cleaner
-  delayed_job_mongoid
   haml
   jobbr!
   jquery-rails
   mocha
-  mongoid (~> 3.0)
+  ohm
+  ohm-contrib!
+  redis
   rspec-rails
   sass-rails
   sidekiq
+  sidekiq-delay!
   sqlite3
   unicorn
   whenever

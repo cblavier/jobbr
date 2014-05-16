@@ -1,17 +1,16 @@
 require 'jobbr/logger'
+require 'jobbr/ohm'
 
 module Jobbr
 
-  class Job
-
-    include Mongoid::Document
-    include Mongoid::Timestamps
+  class Job < ::Ohm::Model
 
     MAX_RUN_PER_JOB = 500
 
-    has_many :runs, class_name: 'Jobbr::Run', dependent: :destroy
+    include ::Ohm::Timestamps
+    include ::Ohm::DataTypes
 
-    scope :by_name, ->(name) { where(_type: /.*#{name.underscore.camelize}/i) }
+    collection :runs, 'Jobbr::Run'
 
     def self.instance(instance_type = nil)
       if instance_type
@@ -19,7 +18,8 @@ module Jobbr
       else
         job_class = self
       end
-      job_class.find_or_create_by(_type: job_class.name)
+      job_class.create if job_class.all.first.nil?
+      job_class.all.first
     end
 
     def self.run
@@ -34,19 +34,18 @@ module Jobbr
     def run(job_run_id = nil, params = {})
       job_run = nil
       if job_run_id
-        job_run = Run.unscoped.find(job_run_id)
+        job_run = Run[job_run_id]
         job_run.status = :running
         job_run.started_at = Time.now
-        job_run.save!
+        job_run.save
       else
         job_run = Run.create(status: :running, started_at: Time.now, job: self)
       end
 
       # prevent Run collection to grow beyond max_run_per_job
-      job_runs = Run.where(job: self).order_by(started_at: 1)
-      runs_count = job_runs.count
+      runs_count = runs.count
       if runs_count > max_run_per_job
-        job_runs.limit(runs_count - max_run_per_job).each(&:destroy)
+        runs.sort(by: :started_at, order: 'ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
       end
 
       # overidding Rails.logger
@@ -57,13 +56,13 @@ module Jobbr
       handle_process_interruption(job_run, 'INT')
 
       begin
-        if self.delayed?
+        if delayed?
           perform(params, job_run)
         else
           perform
         end
         job_run.status = :success
-        job_run.write_attribute(:progress, 100)
+        job_run.progress = 100
       rescue Exception => e
         job_run.status = :failure
         logger.error(e.message)
@@ -72,7 +71,7 @@ module Jobbr
       ensure
         Rails.logger = old_logger
         job_run.finished_at = Time.now
-        job_run.save!
+        job_run.save
       end
     end
 
@@ -81,7 +80,7 @@ module Jobbr
         job_run.status = :failure
         Rails.logger.error("Job interrupted by a #{signal} signal")
         job_run.finished_at = Time.now
-        job_run.save!
+        job_run.save
       end
     end
 
@@ -108,6 +107,21 @@ module Jobbr
 
     def delayed?
       self.is_a? Jobbr::DelayedJob
+    end
+
+    def self.each
+      return unless block_given?
+      Jobbr::Ohm.models(self).each do |model|
+        yield(model.instance)
+      end
+    end
+
+    def self.count
+      count = 0
+      Jobbr::Ohm.models(self).each do |model|
+        count += model.all.count
+      end
+      count
     end
 
     protected

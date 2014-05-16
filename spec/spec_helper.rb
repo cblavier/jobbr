@@ -1,6 +1,5 @@
 ENV['RAILS_ENV'] ||= 'test'
 
-require 'rails/mongoid'
 require File.join(File.dirname(__FILE__), 'dummy', 'config', 'environment.rb')
 require 'rspec/rails'
 require 'database_cleaner'
@@ -14,11 +13,7 @@ RSpec.configure do |config|
   config.mock_with :mocha
 
   config.before(:suite) do
-    DatabaseCleaner.orm = 'mongoid'
-  end
-
-  config.before(:each) do
-    Mongoid::IdentityMap.clear
+    DatabaseCleaner.orm = 'ohm'
   end
 
   config.before(:each) do

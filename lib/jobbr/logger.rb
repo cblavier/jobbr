@@ -4,7 +4,7 @@ module Jobbr
 
     FLUSH_DELAY = 5
 
-    attr_accessor :run, :last_flush_at, :wrapped_logger, :level
+    attr_accessor :run, :wrapped_logger, :level
 
     def initialize(logger, run)
       self.wrapped_logger = logger
@@ -43,11 +43,7 @@ module Jobbr
       if message.is_a? Array
         message = message.join('<br/>')
       end
-      run.log_messages << Jobbr::LogMessage.new(kind: kind, message: message, date: Time.now)
-      if last_flush_at.nil? || (last_flush_at + FLUSH_DELAY.seconds < Time.now)
-        run.save!
-        self.last_flush_at = Time.now
-      end
+      Jobbr::LogMessage.create(kind: kind, message: message, date: Time.now, run: run)
     end
 
   end

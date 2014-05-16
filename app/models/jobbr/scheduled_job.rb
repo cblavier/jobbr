@@ -2,10 +2,6 @@ module Jobbr
 
   class ScheduledJob < Job
 
-    field :scheduled, type: Boolean, default: true
-
-    default_scope ->{ Job.where(scheduled: true, :_type.ne => nil) }
-
     def perform
       raise NotImplementedError.new :message => 'Must be implemented'
     end
