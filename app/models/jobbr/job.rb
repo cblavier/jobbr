@@ -54,6 +54,20 @@ module Jobbr
       all.count
     end
 
+    def self.by_name(name)
+      class_name = name.underscore.camelize
+      Job.find(type: class_name).first
+    end
+
+    def every
+      if scheduled?
+        require self.type.underscore
+        Object::const_get(self.type).every
+      else
+        nil
+      end
+    end
+
     def inner_run(job_run_id = nil, params = {})
       job_run = nil
       if job_run_id
@@ -108,20 +122,20 @@ module Jobbr
     end
 
     def last_run
-      @last_run ||= Run.for_job(self).first
+      @last_run ||= self.ordered_runs.first
     end
 
     def average_run_time
       return 0 if runs.empty?
-      (runs.map { |run| run.run_time }.compact.inject { |sum, el| sum + el }.to_f / runs.length).round(2)
+      (runs.map { |run| run.run_time }.compact.inject { |sum, el| sum + el }.to_f / runs.count).round(2)
     end
 
     def to_param
-      name.parameterize
+      self.type.underscore.dasherize.gsub('/', '::')
     end
 
     def name
-      self._type.demodulize.underscore.humanize
+      self.type.demodulize.underscore.humanize
     end
 
     def scheduled?
@@ -134,6 +148,10 @@ module Jobbr
 
     def perform(*args)
       Object::const_get(self.type).new.perform(*args)
+    end
+
+    def ordered_runs
+      self.runs.sort(by: :started_at, order: 'DESC')
     end
 
     protected

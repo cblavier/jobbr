@@ -1,6 +1,8 @@
 %ul.breadcrumb
   %li.active= t('.title')
 
-= render 'job_list', title: t('.scheduled_jobs'), jobs: @scheduled_jobs
-%br
-= render 'job_list', title: t('.delayed_jobs'), jobs: @delayed_jobs
+- unless @scheduled_jobs.empty?
+  = render 'job_list', title: t('.scheduled_jobs'), jobs: @scheduled_jobs
+
+- unless @delayed_jobs.empty?
+  = render 'job_list', title: t('.delayed_jobs'), jobs: @delayed_jobs

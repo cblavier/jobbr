@@ -6,7 +6,6 @@ module Jobbr
     include ::Ohm::DataTypes
 
     attribute :kind,    Type::Symbol
-    attribute :date,    Type::Time
     attribute :message
 
     reference  :run, 'Jobbr::Run'

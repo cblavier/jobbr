@@ -22,19 +22,12 @@ module Jobbr
       end
     end
 
-    def next
-      return nil if index == 0
-      @next ||= Run.for_job(job).all[index - 1]
+    def to_param
+      id
     end
 
-    def previous
-      @previous ||= Run.for_job(job).all[index + 1]
-    end
-
-    protected
-
-    def index
-      @index ||= job.runs.index(self)
+    def ordered_messages
+      self.messages.sort(by: :created_at, order: 'ASC')
     end
 
   end

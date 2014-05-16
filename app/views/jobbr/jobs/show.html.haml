@@ -5,7 +5,7 @@
   %li.active= @job.name.humanize
 
 .well
-  - if @job.scheduled? && @job.class.every
+  - if @job.scheduled? && @job.every
     %p= raw t('.scheduling', scheduling: display_scheduling(@job))
   = raw t('.average_run_time', run_time: ChronicDuration.output(@job.average_run_time, format: :long))
 

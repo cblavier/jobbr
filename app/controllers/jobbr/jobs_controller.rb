@@ -3,14 +3,17 @@ module Jobbr
   class JobsController < Jobbr::ApplicationController
 
     def index
-      @scheduled_jobs = Jobbr::ScheduledJob.all
-      @delayed_jobs = Jobbr::DelayedJob.all
+      @scheduled_jobs = Jobbr::Job.scheduled
+      @delayed_jobs = Jobbr::Job.delayed
     end
 
     def show
-      @job = Job.by_name(params[:id]).first
-      @runs = Run.for_job(@job)
-      @last_run = Run.unscoped.for_job(@job).first
+      logger.debug "toto"
+      logger.debug params[:id]
+      if @job = Job.by_name(params[:id])
+        @runs = @job.ordered_runs
+        @last_run = @job.last_run
+      end
     end
 
   end

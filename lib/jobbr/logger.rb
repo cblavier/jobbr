@@ -43,7 +43,7 @@ module Jobbr
       if message.is_a? Array
         message = message.join('<br/>')
       end
-      Jobbr::LogMessage.create(kind: kind, message: message, date: Time.now, run: run)
+      Jobbr::LogMessage.create(kind: kind, message: message, run: run)
     end
 
   end

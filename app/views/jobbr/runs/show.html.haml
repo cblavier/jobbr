@@ -8,24 +8,9 @@
   %li.active
     = l @run.started_at
     %i{'class' => status_icon_class(@run.status)}
-  .btn-toolbar
-    .btn-group
-      - if @run.previous
-        = link_to job_run_path(@job, @run.previous), class: 'btn', title: t('.previous_run') do
-          %i.icon-step-backward
-      - else
-        = link_to '#', class: 'btn disabled' do
-          %i.icon-step-backward
-      - if @run.next
-        = link_to job_run_path(@job, @run.next), class: 'btn', title: t('.next_run') do
-          %i.icon-step-forward
-      - else
-        = link_to '#', class: 'btn disabled' do
-          %i.icon-step-forward
 
 - if @run.run_time
   .well
     = t('.run_time', run_time: ChronicDuration.output(@run.run_time.round(2), format: :long))
 
 = render 'logs', run: @run, title: t('.logs'), size: 'large'
-

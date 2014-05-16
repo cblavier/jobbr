@@ -11,7 +11,7 @@
     %tr
       %td
         %i{'class' => status_icon_class(job.last_run.status)}
-      %td= job.name.humanize
+      %td= job.name
       %td= l job.last_run.started_at.localtime
       %td= ChronicDuration.output(job.average_run_time)
       %td

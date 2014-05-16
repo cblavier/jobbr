@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "rails"
-  s.add_dependency "whenever"
+  s.add_dependency "ohm"
+  s.add_dependency "sidekiq"
+  s.add_dependency "sidekiq-delay"
   s.add_dependency "chronic_duration"
   s.add_dependency "haml"
 
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'combustion', '~> 0.3.1'
 end
