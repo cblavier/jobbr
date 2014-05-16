@@ -1,1 +1,1 @@
-services: redis
+services: redis-server
