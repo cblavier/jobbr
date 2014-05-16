@@ -8,8 +8,6 @@ module Jobbr
     end
 
     def show
-      logger.debug "toto"
-      logger.debug params[:id]
       if @job = Job.by_name(params[:id])
         @runs = @job.ordered_runs
         @last_run = @job.last_run
