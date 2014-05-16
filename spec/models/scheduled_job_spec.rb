@@ -7,7 +7,7 @@ module Jobbr
     it 'creates a new job by its name' do
       expect {
         ScheduledJobs::DummyScheduledJob.run
-      }.to change{ ScheduledJob.count }.by(1)
+      }.to change{ Job.all.count }.by(1)
     end
 
     it 'does not create duplicated name jobs' do
@@ -15,16 +15,16 @@ module Jobbr
         ScheduledJobs::DummyScheduledJob.run
         ScheduledJobs::DummyScheduledJob.run
         ScheduledJobs::DummyScheduledJob.run
-      }.to change{ ScheduledJob.count }.by(1)
+      }.to change{ Job.all.count }.by(1)
       expect {
         ScheduledJobs::DummyJob.run
         ScheduledJobs::DummyJob.run
-      }.to change{ ScheduledJob.count }.by(1)
+      }.to change{ Job.all.count }.by(1)
     end
 
     it 'creates a job run for each run' do
       ScheduledJobs::DummyScheduledJob.run
-      job = ScheduledJobs::DummyScheduledJob.all.first
+      job = ScheduledJobs::DummyScheduledJob.instance
 
       expect {
         ScheduledJobs::DummyScheduledJob.run
@@ -34,10 +34,10 @@ module Jobbr
 
     it 'does not create more run than max_run_per_job' do
       ScheduledJobs::DummyScheduledJob.run
-      job = ScheduledJobs::DummyScheduledJob.all.first
+      job = ScheduledJobs::DummyScheduledJob.instance
       first_run = job.runs.first
       max_run_per_job = 5
-      ScheduledJobs::DummyScheduledJob.any_instance.stubs(:max_run_per_job).returns(max_run_per_job)
+      Job.any_instance.stubs(:max_run_per_job).returns(max_run_per_job)
 
       expect {
         (max_run_per_job + 3).times do
@@ -51,9 +51,9 @@ module Jobbr
 
     it 'changes run status from running to success' do
       ScheduledJobs::DummyScheduledJob.run do
-        ScheduledJobs::DummyScheduledJob.all.first.runs.first.status.should be :running
+        ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :running
       end
-      ScheduledJobs::DummyScheduledJob.all.first.runs.first.status.should be :success
+      ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :success
     end
 
     it 'changes run status from running to failure in case of exception' do
@@ -62,24 +62,24 @@ module Jobbr
         ScheduledJobs::DummyScheduledJob.run
       rescue Exception
       end
-      ScheduledJobs::DummyScheduledJob.all.first.runs.first.status.should be :failure
+      ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :failure
     end
 
     it 'sets runni#ng dates' do
       ScheduledJobs::DummyScheduledJob.run
-      job_run = ScheduledJobs::DummyScheduledJob.all.first.runs.first
+      job_run = ScheduledJobs::DummyScheduledJob.instance.runs.first
       job_run.started_at.should_not be_nil
       job_run.finished_at.should_not be_nil
     end
 
     it 'sets the progress to 100% at the end' do
       ScheduledJobs::DummyScheduledJob.run
-      ScheduledJobs::DummyScheduledJob.all.first.runs.first.progress.should be 100
+      ScheduledJobs::DummyScheduledJob.instance.runs.first.progress.should be 100
     end
 
     it 'creates log messages when logging' do
       ScheduledJobs::LoggingJob.run
-      last_job_run = ScheduledJobs::LoggingJob.all.first.runs.first
+      last_job_run = ScheduledJobs::LoggingJob.instance.runs.first
       last_job_run.should have(2).messages
       last_job_run.messages[1].kind.should be :debug
       last_job_run.messages[1].message.should == 'foo'

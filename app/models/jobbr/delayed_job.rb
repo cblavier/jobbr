@@ -32,22 +32,6 @@ module Jobbr
       job_run
     end
 
-    ## Delayed Job callbacks
-    def error(job, exception)
-      puts 'JOBBR ERROR'
-    end
-
-    def failure
-      puts 'JOBBR FAILURE'
-    end
-
-    def self.sidekiq_available?
-      Object.const_get('Sidekiq::Delay')
-      true
-    rescue
-      false
-    end
-
   end
 
 end

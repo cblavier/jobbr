@@ -8,7 +8,7 @@ module Jobbr
     end
 
     def show
-      job_run = Run.find(params[:id])
+      job_run = Run[params[:id]]
       render json: { status: job_run.status, result: job_run.result, progress: job_run.progress }
     end
 

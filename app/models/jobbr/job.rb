@@ -10,7 +10,13 @@ module Jobbr
     include ::Ohm::Timestamps
     include ::Ohm::DataTypes
 
+    attribute :type
+    attribute :delayed, Type::Boolean
+
     collection :runs, 'Jobbr::Run'
+
+    index :type
+    index :delayed
 
     def self.instance(instance_type = nil)
       if instance_type
@@ -18,8 +24,13 @@ module Jobbr
       else
         job_class = self
       end
-      job_class.create if job_class.all.first.nil?
-      job_class.all.first
+
+      job = Job.find(type: job_class.to_s).first
+      if job.nil?
+        delayed = job_class.new.is_a?(Jobbr::DelayedJob)
+        job = Job.create(type: job_class.to_s, delayed: delayed)
+      end
+      job
     end
 
     def self.run
@@ -29,6 +40,18 @@ module Jobbr
     def self.description(desc = nil)
       @description = desc if desc
       @description
+    end
+
+    def self.delayed
+      find(delayed: true)
+    end
+
+    def self.scheduled
+      find(delayed: false)
+    end
+
+    def self.count
+      all.count
     end
 
     def run(job_run_id = nil, params = {})
@@ -102,26 +125,15 @@ module Jobbr
     end
 
     def scheduled?
-      self.is_a? Jobbr::ScheduledJob
+      !self.delayed
     end
 
     def delayed?
-      self.is_a? Jobbr::DelayedJob
+      self.delayed
     end
 
-    def self.each
-      return unless block_given?
-      Jobbr::Ohm.models(self).each do |model|
-        yield(model.instance)
-      end
-    end
-
-    def self.count
-      count = 0
-      Jobbr::Ohm.models(self).each do |model|
-        count += model.all.count
-      end
-      count
+    def perform(*args)
+      Object::const_get(self.type).new.perform(*args)
     end
 
     protected
