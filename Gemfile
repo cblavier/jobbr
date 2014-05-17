@@ -2,12 +2,13 @@ source "http://rubygems.org"
 
 gemspec
 
+gem 'rails', '>= 4.0.0'
+
 # UI
 gem 'jquery-rails'
-gem 'whenever'
 gem 'haml'
 gem 'chronic_duration'
-gem 'sass-rails'
+gem 'sass-rails', '>= 4.0.2'
 gem 'coffee-rails'
 
 # Backend
@@ -16,6 +17,7 @@ gem 'ohm'
 gem 'ohm-contrib', github: 'cyx/ohm-contrib'
 gem 'sidekiq'
 gem 'sidekiq-delay', github: 'cblavier/sidekiq-delay'
+gem 'whenever'
 
 group :development do
   gem 'unicorn'
