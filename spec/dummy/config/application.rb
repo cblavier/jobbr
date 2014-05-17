@@ -58,5 +58,7 @@ module Dummy
     config.assets.version = '1.0'
 
     I18n.enforce_available_locales = false
+
+    config.secret_key_base = '12b5558fef409d5a8e0966a8b38671b7a25708d1c8777bd75760064c8c3cbe82bdd834e7fc3b7b94cd736d03c413265b114b2414691a01ec01340a086717440b'
   end
 end
