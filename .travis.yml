@@ -1,1 +1,5 @@
-services: redis-server
+language: ruby
+rvm:
+  - 2.0.0-p247
+services:
+  - redis-server
