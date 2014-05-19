@@ -1,6 +1,8 @@
 module Jobbr
   module ApplicationHelper
 
+    include FontAwesome::Rails::IconHelper
+
     def delayed_job_creation_path(delayed_job_class, params = {})
       jobbr.delayed_jobs_path(params.merge(job_name: delayed_job_class.name.underscore))
     end
@@ -9,15 +11,16 @@ module Jobbr
       jobbr.delayed_job_path(id)
     end
 
-    def status_icon_class(job_status)
+    def status_icon(job_status)
+      css_class = "job-status #{job_status}"
       if job_status == :waiting
-        "job-status #{job_status} icon-circle-blank"
+        fa_icon 'circle-blank', class: css_class
       elsif job_status == :running
-        "job-status #{job_status} icon-refresh icon-spin"
+        fa_icon 'refresh', class: "#{css_class} spin"
       elsif job_status == :success
-        "job-status #{job_status} icon-certificate"
+        fa_icon 'certificate', class: css_class
       else
-        "job-status #{job_status} icon-exclamation-sign"
+        fa_icon 'exclamation-sign', class: css_class
       end
     end
 

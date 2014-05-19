@@ -7,10 +7,11 @@
       %th= t('.job_name')
       %th= t('.last_run')
       %th= t('.average_run_time')
+      %th
   - jobs.each do |job|
     %tr
       %td
-        %i{'class' => status_icon_class(job.last_run.status)}
+        = status_icon(job.last_run.status)
       %td= job.name
       %td= l job.last_run.started_at.localtime
       %td= ChronicDuration.output(job.average_run_time)
@@ -18,6 +19,6 @@
         .btn-toolbar
           .btn-group
             = link_to job_path(job), class: 'btn', title: t('.see_all_runs') do
-              %i.icon-list
+              = fa_icon 'list'
             = link_to job_run_path(job, job.last_run), class: 'btn', title: t('.see_last_run') do
-              %i.icon-download
+              = fa_icon 'download'

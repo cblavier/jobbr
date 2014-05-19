@@ -17,18 +17,22 @@ PATH
   remote: .
   specs:
     jobbr (2.0.0)
+      bootstrap-sass
       chronic_duration
       coffee-rails
+      font-awesome-rails
       haml
       jquery-rails
+      less-rails
       ohm
       ohm-contrib
       rails (>= 4.0.0)
       redis
-      sass-rails
-      sidekiq
+      sass-rails (>= 4.0.2)
+      sidekiq (>= 3.0.0)
       sidekiq-delay
-      whenever
+      therubyracer
+      turbolinks
 
 GEM
   remote: http://rubygems.org/

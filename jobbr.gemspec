@@ -19,17 +19,21 @@ Gem::Specification.new do |s|
 
   # UI
   s.add_runtime_dependency 'jquery-rails'
-  s.add_runtime_dependency 'whenever'
   s.add_runtime_dependency 'haml'
   s.add_runtime_dependency 'chronic_duration'
-  s.add_runtime_dependency 'sass-rails'
+  s.add_runtime_dependency 'sass-rails', '>= 4.0.2'
   s.add_runtime_dependency 'coffee-rails'
+  s.add_runtime_dependency 'therubyracer'
+  s.add_runtime_dependency 'less-rails'
+  s.add_runtime_dependency 'bootstrap-sass'
+  s.add_runtime_dependency 'font-awesome-rails'
+  s.add_runtime_dependency 'turbolinks'
 
   # Backend
   s.add_runtime_dependency 'redis'
   s.add_runtime_dependency 'ohm'
   s.add_runtime_dependency 'ohm-contrib'
-  s.add_runtime_dependency 'sidekiq'
+  s.add_runtime_dependency 'sidekiq', '>= 3.0.0'
   s.add_runtime_dependency 'sidekiq-delay'
 
 end

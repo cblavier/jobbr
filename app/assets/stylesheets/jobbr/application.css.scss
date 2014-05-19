@@ -1,8 +1,11 @@
-@import 'jobbr/bootstrap';
-@import 'jobbr/font-awesome';
+@import 'bootstrap';
+@import 'font-awesome';
 
-#auto-refresh {
-  float: right;
+.navbar-right {
+  margin-top: 5px;
+  .btn {
+    margin-right: 5px;
+  }
 }
 
 .job-status {
@@ -29,7 +32,7 @@
     margin-left: 5px;
     font-size: 15px;
   }
-  
+
 }
 
 .logs {

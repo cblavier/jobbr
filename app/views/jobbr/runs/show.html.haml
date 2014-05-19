@@ -1,13 +1,12 @@
-%ul.breadcrumb
+%ol.breadcrumb
   %li
     = link_to t('jobbr.jobs.index.title'), jobs_path
-    %span.divider /
   %li
     = link_to @job.name.humanize, job_path(@job)
-    %span.divider /
   %li.active
     = l @run.started_at
-    %i{'class' => status_icon_class(@run.status)}
+
+  = status_icon(@run.status)
 
 - if @run.run_time
   .well

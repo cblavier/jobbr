@@ -1,7 +1,8 @@
 #= require jquery
 #= require jquery_ujs
-#= require jobbr/jquery-pjax
-#= require jobbr/bootstrap
+#= require turbolinks
+#= require bootstrap
+
 #= require_self
 
 scrollToBottom = ($container) ->
@@ -12,7 +13,7 @@ $(document).ready ->
   $mainContainer = $('#main.container')
 
   scrollToBottom($('.logs'))
-  $('a').pjax container: $mainContainer
+  #$('a').pjax container: $mainContainer
 
   $(document).on 'pjax:complete', ->
     scrollToBottom($('.logs'))
@@ -24,11 +25,8 @@ $(document).ready ->
     active = !$(this).hasClass('active')
     $('i', $(this)).toggleClass('icon-spin', active)
     if active
-      interval = setInterval(->
-        $.pjax({url: document.location, container: $mainContainer})
-      , autoRefreshInterval)
+      #interval = setInterval(->
+      #  $.pjax({url: document.location, container: $mainContainer})
+      #, autoRefreshInterval)
     else
-      clearInterval(interval)
-
-
-
+      # clearInterval(interval)

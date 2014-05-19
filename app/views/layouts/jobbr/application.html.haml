@@ -10,11 +10,13 @@
     = javascript_include_tag 'jobbr/application'
 
   %body
-    .navbar
-      .navbar-inner
-        %a.brand= t('.title')
-        %button.btn#auto-refresh{type: 'button', 'data-toggle' => 'button'}
-          %i.icon-refresh
-          = t('.auto_refresh')
+    .navbar.navbar-default
+      .navbar-header
+        %a.navbar-brand= t('.title')
+      .collapse.navbar-collapse
+        .nav.navbar-nav.navbar-right
+          %a.btn.btn-default#auto-refresh{type: 'button', 'data-toggle' => 'button', href: '#'}
+            = fa_icon 'refresh'
+            = t('.auto_refresh')
     #main.container
       = yield
