@@ -6,6 +6,11 @@
 
     = csrf_meta_tags
 
+    :javascript
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+      }
+
     = stylesheet_link_tag    'jobbr/application'
     = javascript_include_tag 'jobbr/application'
 

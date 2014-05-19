@@ -65,7 +65,7 @@ module Jobbr
       ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :failure
     end
 
-    it 'sets runni#ng dates' do
+    it 'sets running dates' do
       ScheduledJobs::DummyScheduledJob.run
       job_run = ScheduledJobs::DummyScheduledJob.instance.runs.first
       job_run.started_at.should_not be_nil

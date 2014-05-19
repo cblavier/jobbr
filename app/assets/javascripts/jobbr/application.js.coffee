@@ -5,28 +5,34 @@
 
 #= require_self
 
+autoRefreshInterval = 3000
+timeout = undefined
+
 scrollToBottom = ($container) ->
   if $container.length > 0
     $container.scrollTop($container[0].scrollHeight)
 
-$(document).ready ->
-  $mainContainer = $('#main.container')
+toggleRefreshButton = ->
+  $('#auto-refresh').toggleClass('active')
+  $('#auto-refresh i').toggleClass('fa-spin')
+  $('#auto-refresh').hasClass('active')
 
-  scrollToBottom($('.logs'))
-  #$('a').pjax container: $mainContainer
-
-  $(document).on 'pjax:complete', ->
-    scrollToBottom($('.logs'))
-
-  interval = undefined
-  autoRefreshInterval = 5000
-
-  $('#auto-refresh').on 'click', ->
-    active = !$(this).hasClass('active')
-    $('i', $(this)).toggleClass('icon-spin', active)
-    if active
-      #interval = setInterval(->
-      #  $.pjax({url: document.location, container: $mainContainer})
-      #, autoRefreshInterval)
+enableAutoRefresh = (force = false) ->
+  if force || (getURLParameter('refresh') == '1')
+    if toggleRefreshButton()
+      timeout = setTimeout(->
+        Turbolinks.visit("#{document.location.pathname}?refresh=1")
+      , autoRefreshInterval)
     else
-      # clearInterval(interval)
+      clearTimeout(timeout)
+      Turbolinks.visit(document.location.pathname)
+
+init = ->
+  scrollToBottom($('.logs'))
+  enableAutoRefresh()
+  $('#auto-refresh').on 'click', -> enableAutoRefresh(true)
+
+$(document).ready ->
+
+  init()
+  $(document).on 'page:load', init
