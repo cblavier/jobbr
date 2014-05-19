@@ -1,5 +1,7 @@
 require 'jobbr/logger'
 require 'jobbr/ohm'
+require 'jobbr/concerns/delayed'
+require 'jobbr/concerns/scheduled'
 
 module Jobbr
 
@@ -19,24 +21,27 @@ module Jobbr
     index :type
     index :delayed
 
-    def self.instance(instance_type = nil)
-      if instance_type
-        job_class = instance_type.camelize.constantize
+    def self.instance(instance_class_name = nil)
+      if instance_class_name
+        job_class = instance_class_name.camelize.constantize
       else
         job_class = self
       end
 
       job = Job.find(type: job_class.to_s).first
       if job.nil?
-        delayed = job_class.new.is_a?(Jobbr::DelayedJob)
+        delayed = job_class.included_modules.include?(Jobbr::Delayed)
         job = Job.create(type: job_class.to_s, delayed: delayed)
       end
       job
     end
 
-    def self.run
-      job_run = Run.create(status: :running, started_at: Time.now, job: self.instance)
-      instance.inner_run(job_run.id)
+    def self.run_by_name(name, *args)
+      instance(name).run(args)
+    end
+
+    def self.run(*args)
+      instance.run(args)
     end
 
     def self.description(desc = nil)
@@ -68,6 +73,16 @@ module Jobbr
       else
         nil
       end
+    end
+
+    def run(params, delayed = true)
+      job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
+      if delayed && self.delayed && !Rails.env.test?
+        self.delay.inner_run(job_run.id, params)
+      else
+        self.inner_run(job_run.id, params)
+      end
+      job_run
     end
 
     def inner_run(job_run_id, params = {})
@@ -137,6 +152,10 @@ module Jobbr
 
     def after_delete
       self.runs.each(&:delete)
+    end
+
+    def perform
+      raise NotImplementedError.new :message => 'Must be implemented'
     end
 
     protected

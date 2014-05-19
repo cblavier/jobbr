@@ -1,6 +1,8 @@
 module ScheduledJobs
 
-  class DummyJob < Jobbr::ScheduledJob
+  class DummyJob < Jobbr::Job
+
+    include Jobbr::Scheduled
 
     # description 'Describe your job here'
 

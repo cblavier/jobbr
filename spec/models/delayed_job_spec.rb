@@ -1,12 +1,13 @@
 require 'spec_helper'
+require 'jobbr/concerns/delayed'
 
 module Jobbr
 
-  describe DelayedJob do
+  describe Delayed do
 
     it 'creates a new job by its name' do
       expect {
-        DelayedJob.run_by_name('delayed_jobs/dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
       }.to change{ Job.count }.by(1)
 
       job = DelayedJobs::DummyJob.instance
@@ -16,14 +17,14 @@ module Jobbr
 
     it 'does not create duplicated name jobs' do
       expect {
-        DelayedJob.run_by_name('delayed_jobs/dummy_job', {}, false)
-        DelayedJob.run_by_name('delayed_jobs/dummy_job', {}, false)
-        DelayedJob.run_by_name('delayed_jobs/dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
       }.to change{ Job.all.count }.by(1)
 
       expect {
-        DelayedJob.run_by_name('delayed_jobs/other_dummy_job', {}, false)
-        DelayedJob.run_by_name('delayed_jobs/other_dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/other_dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/other_dummy_job', {}, false)
       }.to change{ Job.all.count }.by(1)
     end
 

@@ -1,8 +1,9 @@
 require 'spec_helper'
+require 'jobbr/concerns/scheduled'
 
 module Jobbr
 
-  describe ScheduledJob do
+  describe Scheduled do
 
     it 'creates a new job by its name' do
       expect {
