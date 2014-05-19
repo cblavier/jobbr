@@ -35,7 +35,8 @@ module Jobbr
     end
 
     def self.run
-      instance.inner_run
+      job_run = Run.create(status: :running, started_at: Time.now, job: self.instance)
+      instance.inner_run(job_run.id)
     end
 
     def self.description(desc = nil)
@@ -69,56 +70,39 @@ module Jobbr
       end
     end
 
-    def inner_run(job_run_id = nil, params = {})
-      job_run = nil
-      if job_run_id
-        job_run = Run[job_run_id]
-        job_run.status = :running
-        job_run.started_at = Time.now
-        job_run.save
-      else
-        job_run = Run.create(status: :running, started_at: Time.now, job: self)
-      end
+    def inner_run(job_run_id, params = {})
+      job_run = Run[job_run_id]
+      job_run.status = :running
+      job_run.started_at = Time.now
+      job_run.save
 
-      # prevent Run collection to grow beyond max_run_per_job
-      runs_count = runs.count
-      if runs_count > max_run_per_job
-        runs.sort(by: :started_at, order: 'ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
-      end
+      cap_runs!
 
-      # overidding Rails.logger
-      old_logger = Rails.logger
-      Rails.logger = Jobbr::Logger.new(Rails.logger, job_run)
-
-      handle_process_interruption(job_run, 'TERM')
-      handle_process_interruption(job_run, 'INT')
+      handle_process_interruption(job_run, ['TERM', 'INT'])
 
       begin
-        if delayed?
-          perform(params, job_run)
-        else
-          perform
-        end
+        perform(job_run, params)
         job_run.status = :success
         job_run.progress = 100
       rescue Exception => e
         job_run.status = :failure
-        logger.error(e.message)
-        logger.error(e.backtrace)
+        job_run.logger.error(e.message)
+        job_run.logger.error(e.backtrace)
         raise e
       ensure
-        Rails.logger = old_logger
         job_run.finished_at = Time.now
         job_run.save
       end
     end
 
-    def handle_process_interruption(job_run, signal)
-      Signal.trap(signal) do
-        job_run.status = :failure
-        Rails.logger.error("Job interrupted by a #{signal} signal")
-        job_run.finished_at = Time.now
-        job_run.save
+    def handle_process_interruption(job_run, signals)
+      signals.each do |signal|
+        Signal.trap(signal) do
+          job_run.status = :failure
+          job_run.logger.error("Job interrupted by a #{signal} signal")
+          job_run.finished_at = Time.now
+          job_run.save
+        end
       end
     end
 
@@ -147,10 +131,6 @@ module Jobbr
       self.delayed
     end
 
-    def perform(*args)
-      Object::const_get(self.type).new.perform(*args)
-    end
-
     def ordered_runs
       self.runs.sort(by: :started_at, order: 'DESC')
     end
@@ -166,8 +146,26 @@ module Jobbr
       MAX_RUN_PER_JOB
     end
 
-    def logger
-      Rails.logger
+    # prevents Run collection to grow beyond max_run_per_job
+    def cap_runs!
+      runs_count = self.runs.count
+      if runs_count > max_run_per_job
+        runs.sort(by: :started_at, order: 'ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
+      end
+    end
+
+    def perform(job_run, params)
+      case typed_self.method(:perform).parameters.length
+      when 0 then typed_self.perform
+      when 1 then typed_self.perform(job_run)
+      when 2 then typed_self.perform(job_run, params)
+      end
+    end
+
+    # working around lack of polymorphism in Ohm
+    # using type attributed to get a typed instance
+    def typed_self
+      @typed_self ||= Object::const_get(self.type).new
     end
 
   end

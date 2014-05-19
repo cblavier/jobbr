@@ -35,6 +35,10 @@ module Jobbr
       self.messages.each(&:delete)
     end
 
+    def logger
+      @logger ||= Jobbr::Logger.new(Rails.logger, self)
+    end
+
   end
 
 end

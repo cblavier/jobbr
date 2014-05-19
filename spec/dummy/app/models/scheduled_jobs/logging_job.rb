@@ -1,10 +1,12 @@
 module ScheduledJobs
 
   class LoggingJob < Jobbr::ScheduledJob
-    def perform
-      Rails.logger.debug 'foo'
-      Rails.logger.error 'bar'
+
+    def perform(run)
+      run.logger.debug 'foo'
+      run.logger.error 'bar'
     end
+    
   end
 
 end

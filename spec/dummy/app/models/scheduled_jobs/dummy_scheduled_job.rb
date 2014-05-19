@@ -6,8 +6,8 @@ module ScheduledJobs
 
     every 1.day, at: '5.30 am'
 
-    def perform
-      logger.debug 'Dummy!!!!'
+    def perform(run)
+      run.logger.debug 'Dummy!!!!'
     end
 
   end

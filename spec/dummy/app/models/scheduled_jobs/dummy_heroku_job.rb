@@ -6,8 +6,8 @@ module ScheduledJobs
 
     heroku_run :daily, priority: 0
 
-    def perform
-      Rails.logger.debug 'heroku :)'
+    def perform(run)
+      run.logger.debug 'heroku :)'
     end
 
   end
