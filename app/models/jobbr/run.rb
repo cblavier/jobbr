@@ -4,6 +4,7 @@ module Jobbr
 
     include ::Ohm::Timestamps
     include ::Ohm::DataTypes
+    include ::Ohm::Callbacks
 
     attribute :status,      Type::Symbol
     attribute :started_at,  Type::Time
@@ -28,6 +29,10 @@ module Jobbr
 
     def ordered_messages
       self.messages.sort(by: :created_at, order: 'ASC')
+    end
+
+    def after_delete
+      self.messages.each(&:delete)
     end
 
   end

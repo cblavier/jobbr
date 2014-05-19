@@ -9,6 +9,7 @@ module Jobbr
 
     include ::Ohm::Timestamps
     include ::Ohm::DataTypes
+    include ::Ohm::Callbacks
 
     attribute :type
     attribute :delayed, Type::Boolean
@@ -152,6 +153,10 @@ module Jobbr
 
     def ordered_runs
       self.runs.sort(by: :started_at, order: 'DESC')
+    end
+
+    def after_delete
+      self.runs.each(&:delete)
     end
 
     protected

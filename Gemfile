@@ -10,6 +10,11 @@ gem 'haml'
 gem 'chronic_duration'
 gem 'sass-rails', '>= 4.0.2'
 gem 'coffee-rails'
+gem 'therubyracer'
+gem 'less-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+gem 'turbolinks'
 
 # Backend
 gem 'redis'
