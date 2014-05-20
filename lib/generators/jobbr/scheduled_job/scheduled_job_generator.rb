@@ -5,7 +5,7 @@ class Jobbr::ScheduledJobGenerator < Rails::Generators::NamedBase
   def create_scheduled_job
     empty_directory "app/models/scheduled_jobs"
     template "scheduled_job.erb", "app/models/scheduled_jobs/#{file_name}_job.rb", name: file_name
-    generate 'jobbr:scheduled_job_config'
+    generate 'jobbr:scheduled_job_config' unless Rails.env.test?
   end
 
 end

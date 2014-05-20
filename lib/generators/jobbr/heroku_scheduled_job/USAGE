@@ -1,9 +1,0 @@
-Description:
-    Generates a new Heroku scheduled job in ScheduledJobs namespace.
-
-Example:
-    rails generate heroku_scheduled_job MySample
-
-    This will create:
-        Model: app/models/scheduled_jobs/my_sample_job.rb
-        Config: config/initializers/jobbr.rb

@@ -33,5 +33,6 @@ group :test do
   gem 'rspec-rails'
   gem 'mocha'
   gem 'database_cleaner'
+  gem 'generator_spec'
   gem 'codeclimate-test-reporter', require: 'nil'
 end
