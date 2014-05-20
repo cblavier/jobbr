@@ -161,7 +161,7 @@ module Jobbr
         job_run.status = :success
         job_run.progress = 100
       rescue Exception => e
-        job_run.status = :failure
+        job_run.status = :failed
         job_run.logger.error(e.message)
         job_run.logger.error(e.backtrace)
         raise e

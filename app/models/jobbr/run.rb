@@ -15,6 +15,8 @@ module Jobbr
     reference  :job,      'Jobbr::Job'
     collection :messages, 'Jobbr::LogMessage'
 
+    index :status
+
     def run_time
       @run_time ||= if finished_at && started_at
         finished_at - started_at

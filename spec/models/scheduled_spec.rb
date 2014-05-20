@@ -57,13 +57,13 @@ module Jobbr
       ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :success
     end
 
-    it 'changes run status from running to failure in case of exception' do
+    it 'changes run status from running to failed in case of exception' do
       ScheduledJobs::DummyScheduledJob.any_instance.stubs(:perform).raises('an error')
       begin
         ScheduledJobs::DummyScheduledJob.run
       rescue Exception
       end
-      ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :failure
+      ScheduledJobs::DummyScheduledJob.instance.runs.first.status.should be :failed
     end
 
     it 'sets running dates' do
