@@ -1,7 +1,7 @@
 = Jobbr
 
 Jobbr is a Rails engine for supervising your delayed jobs and scheduled jobs (think Cron).
-Delayed jobs can either be running with delayed_job_mongoid or sidekiq.
+Delayed jobs will run using sidekiq.
 
 It provides a framework to abstract creation and execution of such jobs and a user interface to supervise jobs and read their logs.
 
@@ -20,8 +20,9 @@ It provides a framework to abstract creation and execution of such jobs and a us
 
 Jobbr has strong dependencies on following components:
 
-* *Mongoid*: all jobs are stored in MongoDB for supervision. May be abstracted out later for ActiveRecord compatibility.
-* *Whenever*: Jobbr uses {Whenever}[https://github.com/javan/whenever] gem to automatically updates Crontab during a Capistrano deployment.
+* *Sidekiq*: the background processing framework used to run delayed jobs.
+* *Redis*: all jobs & logs are stored in Redis for supervision.
+* *Whenever*: Jobbr uses {Whenever}[https://github.com/javan/whenever] gem to automatically updates Crontab during deployment.
 
 == Setup
 
@@ -57,7 +58,7 @@ And to see it in your crontab preview:
 
 You can also use Heroku Scheduler to run jobs. Unfortunately Heroku does not provide Cron-scheduling, but let you run jobs every 10 minutes, every hour or every day.
 
-Jobbr provides you with 3 tasks `jobbr:heroku:minutely`, `jobbr:heroku:hourly` and `jobbr:heroku:daily`, that will run any ScheduledJob with `heroku_run` directive.
+Jobbr provides you with 3 tasks `jobbr:heroku:minutely`, `jobbr:heroku:hourly` and `jobbr:heroku:daily`, that will run any Job with `heroku_run` directive.
 
 Run following generator to create an heroku scheduled job
 
@@ -72,8 +73,6 @@ You also need to add an environment variable to let Jobbr know it's running on H
     heroku config:add HEROKU=true
 
 === Delayed Jobs
-
-Add delayed_job_mongoid or sidekiq + sidekiq-delay to your Gemfile, and according backend will be used.
 
 Use generators to get a new job model:
 
@@ -93,7 +92,7 @@ You can now run your delayed job as following:
 
 And then get job status like this:
 
-    Jobbr::Run.find(run_id).status # returns :waiting / :running / :failure / :success
+    Jobbr::Run.find(run_id).status # returns :waiting / :running / :failed / :success
 
 Jobbr also provides a controller to run and poll delayed_jobs :
 
