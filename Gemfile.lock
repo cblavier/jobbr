@@ -248,6 +248,7 @@ DEPENDENCIES
   poltergeist
   rails (>= 4.0.0)
   redis
+  redis-namespace
   require_all
   rspec-rails
   sass-rails (>= 4.0.2)

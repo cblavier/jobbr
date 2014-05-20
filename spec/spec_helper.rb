@@ -9,7 +9,6 @@ end
 require File.join(File.dirname(__FILE__), 'dummy', 'config', 'environment.rb')
 require 'require_all'
 require 'rspec/rails'
-require 'database_cleaner'
 require 'generator_spec'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
@@ -38,20 +37,17 @@ RSpec.configure do |config|
     FileUtils.rm_rf(SPEC_TMP_ROOT)
   end
 
-  config.before(:suite) do
-    DatabaseCleaner.orm = 'ohm'
-  end
-
   config.before(:each) do
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.after(:suite) do
-    #DatabaseCleaner.clean_with(:truncation)
+    clean_redis
   end
 
   config.after(:all) do
     Timecop.return
+    clean_redis
+  end
+
+  def clean_redis
+    Ohm.redis.call("KEYS", "Jobbr::*").each{|key| Ohm.redis.call('DEL', key)}
   end
 
 end
