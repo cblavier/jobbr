@@ -6,13 +6,6 @@ GIT
       activesupport (>= 3.2)
       sidekiq
 
-GIT
-  remote: git://github.com/cyx/ohm-contrib.git
-  revision: c9c0887d72dde6fd768c381285aec391eb8818a8
-  specs:
-    ohm-contrib (2.0.0)
-      ohm (~> 2.0.0)
-
 PATH
   remote: .
   specs:
@@ -136,6 +129,8 @@ GEM
       msgpack
       nido
       redic
+    ohm-contrib (2.0.0)
+      ohm (~> 2.0.0)
     poltergeist (1.5.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -249,7 +244,7 @@ DEPENDENCIES
   less-rails
   mocha
   ohm
-  ohm-contrib!
+  ohm-contrib
   poltergeist
   rails (>= 4.0.0)
   redis

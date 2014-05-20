@@ -19,7 +19,7 @@ gem 'turbolinks'
 # Backend
 gem 'redis'
 gem 'ohm'
-gem 'ohm-contrib', github: 'cyx/ohm-contrib'
+gem 'ohm-contrib'
 gem 'sidekiq'
 gem 'sidekiq-delay', github: 'cblavier/sidekiq-delay'
 gem 'whenever'
