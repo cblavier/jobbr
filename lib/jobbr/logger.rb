@@ -2,8 +2,6 @@ module Jobbr
 
   class Logger
 
-    FLUSH_DELAY = 5
-
     attr_accessor :run, :wrapped_logger, :level
 
     def initialize(logger, run)

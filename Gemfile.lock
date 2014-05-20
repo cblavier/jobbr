@@ -127,7 +127,7 @@ GEM
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     msgpack (0.5.8)
-    multi_json (1.10.0)
+    multi_json (1.10.1)
     nido (0.0.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)

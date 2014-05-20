@@ -40,10 +40,18 @@ feature 'Job list' do
 
     visit jobbr_path
     assert_title 'Job list'
-    first('.scheduled-jobs a.all-runs').click
 
+    first('.scheduled-jobs a.all-runs').click
     assert_title 'Dummy job'
     find('.table tbody').should have_selector('tr', count: 3)
+  end
+
+  it "shows a specific run" do
+    visit jobbr_path
+    assert_title 'Job list'
+
+    first('.scheduled-jobs a.last-run').click
+    assert_title I18n.localize(ScheduledJobs::DummyJob.instance.ordered_runs.first.started_at)
   end
 
   def assert_title(title)

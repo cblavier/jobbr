@@ -4,7 +4,8 @@
   %li
     = link_to @job.name.humanize, job_path(@job)
   %li.active
-    = l @run.started_at
+    - if @run.started_at
+      = l @run.started_at
 
   = status_icon(@run.status)
 

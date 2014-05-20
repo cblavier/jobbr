@@ -32,8 +32,8 @@ describe 'jobbr_tasks' do
 
     before do
       job = ScheduledJobs::DummyJob.instance
-      3.times { Jobbr::Run.create(job: job, status: :running) }
-      2.times { Jobbr::Run.create(job: job, status: :success) }
+      3.times { Jobbr::Run.create(job: job, status: :running, started_at: Time.now) }
+      2.times { Jobbr::Run.create(job: job, status: :success, started_at: Time.now) }
     end
 
     it 'marks running jobs as failed' do
