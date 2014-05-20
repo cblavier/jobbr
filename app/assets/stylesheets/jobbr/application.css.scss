@@ -20,7 +20,7 @@
   &.running, &.success {
     color: limegreen;
   }
-  &.failure {
+  &.failed {
     color: red;
   }
 

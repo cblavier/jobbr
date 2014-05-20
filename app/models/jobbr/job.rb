@@ -120,7 +120,7 @@ module Jobbr
     end
 
     def ordered_runs
-      self.runs.sort(by: :started_at, order: 'DESC')
+      self.runs.sort_by(:started_at, order: 'ALPHA DESC')
     end
 
     def after_delete
@@ -142,7 +142,7 @@ module Jobbr
     def cap_runs!
       runs_count = self.runs.count
       if runs_count > max_run_per_job
-        runs.sort(by: :started_at, order: 'ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
+        runs.sort_by(:started_at, order: 'ALPHA ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
       end
     end
 

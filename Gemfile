@@ -35,4 +35,8 @@ group :test do
   gem 'database_cleaner'
   gem 'generator_spec'
   gem 'codeclimate-test-reporter', require: 'nil'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'launchy'
+  gem 'timecop'
 end

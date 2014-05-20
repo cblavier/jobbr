@@ -17,14 +17,16 @@
       %th= t('.last_run')
       %th= t('.duration')
 
-  - @runs.each do |run|
-    %tr
-      %td
-        = status_icon(run.status)
-      %td= l run.started_at.localtime
-      %td= ChronicDuration.output((run.finished_at - run.started_at).round(2)) rescue 'N/A'
-      %td
-        .btn-toolbar
-          .btn-group
-            = link_to job_run_path(@job, run), class: 'btn', title: t('.see_run') do
-              %i.icon-download
+  %tbody
+    - @runs.each do |run|
+      %tr
+        %td
+          = status_icon(run.status)
+        - if run.started_at
+          %td= l run.started_at.localtime
+        %td= ChronicDuration.output((run.finished_at - run.started_at).round(2)) rescue 'N/A'
+        %td
+          .btn-toolbar
+            .btn-group
+              = link_to job_run_path(@job, run), class: 'btn see-run', title: t('.see_run') do
+                %i.icon-download

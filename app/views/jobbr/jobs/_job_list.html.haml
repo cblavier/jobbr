@@ -1,6 +1,6 @@
 %h5= title
 
-%table.table.table-striped.table-hover
+%table.table.table-striped.table-hover{class: css_class}
   %thead
     %tr
       %th= t('.status')
@@ -8,17 +8,20 @@
       %th= t('.last_run')
       %th= t('.average_run_time')
       %th
-  - jobs.each do |job|
-    %tr
-      %td
-        = status_icon(job.last_run.status)
-      %td= job.name
-      %td= l job.last_run.started_at.localtime
-      %td= ChronicDuration.output(job.average_run_time)
-      %td
-        .btn-toolbar
-          .btn-group
-            = link_to job_path(job), class: 'btn', title: t('.see_all_runs') do
-              = fa_icon 'list'
-            = link_to job_run_path(job, job.last_run), class: 'btn', title: t('.see_last_run') do
-              = fa_icon 'download'
+
+  %tbody
+    - jobs.each do |job|
+      %tr
+        %td
+          = status_icon(job.last_run.status)
+        %td= job.name
+        - if job.last_run && job.last_run.started_at
+          %td= l job.last_run.started_at.localtime
+        %td= ChronicDuration.output(job.average_run_time)
+        %td
+          .btn-toolbar
+            .btn-group
+              = link_to job_path(job), class: 'btn all-runs', title: t('.see_all_runs') do
+                = fa_icon 'list'
+              = link_to job_run_path(job, job.last_run), class: 'btn last-run', title: t('.see_last_run') do
+                = fa_icon 'download'

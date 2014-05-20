@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'jobbr/concerns/scheduled'
 
 module Jobbr
 

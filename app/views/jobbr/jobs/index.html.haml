@@ -2,7 +2,7 @@
   %li.active= t('.title')
 
 - unless @scheduled_jobs.empty?
-  = render 'job_list', title: t('.scheduled_jobs'), jobs: @scheduled_jobs
+  = render 'job_list', title: t('.scheduled_jobs'), jobs: @scheduled_jobs, css_class: 'scheduled-jobs'
 
 - unless @delayed_jobs.empty?
-  = render 'job_list', title: t('.delayed_jobs'), jobs: @delayed_jobs
+  = render 'job_list', title: t('.delayed_jobs'), jobs: @delayed_jobs, css_class: 'delayed-jobs'

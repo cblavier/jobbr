@@ -30,7 +30,7 @@ module Jobbr
     end
 
     def ordered_messages
-      self.messages.sort(by: :created_at, order: 'ASC')
+      self.messages.sort_by(:created_at, order: 'ALPHA ASC')
     end
 
     def after_delete

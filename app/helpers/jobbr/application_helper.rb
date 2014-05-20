@@ -16,11 +16,11 @@ module Jobbr
       if job_status == :waiting
         fa_icon 'circle-blank', class: css_class
       elsif job_status == :running
-        fa_icon 'refresh', class: "#{css_class}"
+        fa_icon 'refresh', class: "#{css_class} fa-spin"
       elsif job_status == :success
         fa_icon 'certificate', class: css_class
       else
-        fa_icon 'exclamation-sign', class: css_class
+        fa_icon 'exclamation-circle', class: css_class
       end
     end
 

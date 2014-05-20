@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'jobbr/concerns/delayed'
 
 module Jobbr
 
