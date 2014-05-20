@@ -1,7 +1,5 @@
 require 'jobbr/logger'
 require 'jobbr/ohm'
-require 'jobbr/concerns/delayed'
-require 'jobbr/concerns/scheduled'
 
 module Jobbr
 
@@ -66,15 +64,6 @@ module Jobbr
       Job.find(type: class_name).first
     end
 
-    def every
-      if scheduled?
-        require self.type.underscore
-        Object::const_get(self.type).every
-      else
-        nil
-      end
-    end
-
     def run(params, delayed = true)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
       if delayed && self.delayed && !Rails.env.test?
@@ -85,31 +74,6 @@ module Jobbr
       job_run
     end
 
-    def inner_run(job_run_id, params = {})
-      job_run = Run[job_run_id]
-      job_run.status = :running
-      job_run.started_at = Time.now
-      job_run.save
-
-      cap_runs!
-
-      handle_process_interruption(job_run, ['TERM', 'INT'])
-
-      begin
-        perform(job_run, params)
-        job_run.status = :success
-        job_run.progress = 100
-      rescue Exception => e
-        job_run.status = :failure
-        job_run.logger.error(e.message)
-        job_run.logger.error(e.backtrace)
-        raise e
-      ensure
-        job_run.finished_at = Time.now
-        job_run.save
-      end
-    end
-
     def handle_process_interruption(job_run, signals)
       signals.each do |signal|
         Signal.trap(signal) do
@@ -118,6 +82,15 @@ module Jobbr
           job_run.finished_at = Time.now
           job_run.save
         end
+      end
+    end
+
+    def every
+      if scheduled?
+        require self.type.underscore
+        Object::const_get(self.type).every
+      else
+        nil
       end
     end
 
@@ -170,6 +143,31 @@ module Jobbr
       runs_count = self.runs.count
       if runs_count > max_run_per_job
         runs.sort(by: :started_at, order: 'ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
+      end
+    end
+
+    def inner_run(job_run_id, params = {})
+      job_run = Run[job_run_id]
+      job_run.status = :running
+      job_run.started_at = Time.now
+      job_run.save
+
+      cap_runs!
+
+      handle_process_interruption(job_run, ['TERM', 'INT'])
+
+      begin
+        perform(job_run, params)
+        job_run.status = :success
+        job_run.progress = 100
+      rescue Exception => e
+        job_run.status = :failure
+        job_run.logger.error(e.message)
+        job_run.logger.error(e.backtrace)
+        raise e
+      ensure
+        job_run.finished_at = Time.now
+        job_run.save
       end
     end
 

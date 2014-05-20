@@ -1,6 +1,8 @@
 module ScheduledJobs
 
-  class <%=name.camelize%>Job < Jobbr::ScheduledJob
+  class <%=name.camelize%>Job < Jobbr::Job
+
+    include Jobbr::Scheduled
 
     # description 'Describe your job here'
 

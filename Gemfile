@@ -23,6 +23,7 @@ gem 'ohm-contrib', github: 'cyx/ohm-contrib'
 gem 'sidekiq'
 gem 'sidekiq-delay', github: 'cblavier/sidekiq-delay'
 gem 'whenever'
+gem 'require_all'
 
 group :development do
   gem 'unicorn'

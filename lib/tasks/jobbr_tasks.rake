@@ -1,16 +1,15 @@
 unless ENV['HEROKU']
 
-  models_root = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'app', 'models'))
-  require File.join(models_root, 'jobbr', 'standalone_tasks')
+  require "require_all"
+  require_all File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'app', 'models', 'jobbr'))
 
   namespace :jobbr do
 
-    Jobbr::StandaloneTasks.all(:scheduled_job).each do |info|
+    Jobbr::Ohm.models(Jobbr::Scheduled).each do |model|
       # dynamically create a rake task for each individual Jobbr::ScheduledJob
-      desc info[:desc]
-      task info[:name] => :environment do
-        info[:dependencies].each { |lib| load lib }
-        info[:klass_name].constantize.run
+      desc model.description
+      task model.task_name => :environment do
+        model.run
       end
     end
 
@@ -22,4 +21,3 @@ unless ENV['HEROKU']
   end
 
 end
-

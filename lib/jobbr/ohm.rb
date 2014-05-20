@@ -7,20 +7,10 @@ module Jobbr
     require "ohm"
 
     # Return all Ohm models.
-    # You can also pass a parent class to get all childrens
-    #
-    # @example Return *all* models.
-    #   Jobbr::Ohm.models
-    #
-    # @example Return Job children models.
-    #   Jobbr::Ohm.models(Job)
-    #
-    # @param [ Class ] parent The parent model class.
-    #
-    # @return [ Array<Class> ] The models.
-    #
+    # You can also pass a module class to get all models including that module
     def models(parent = nil)
-      model_paths = Dir[model_directory]
+      model_paths = Dir["#{Rails.root}/app/models/**/*.rb"]
+      model_paths.each{ |path| require path }
       sanitized_model_paths = model_paths.map { |path| path.gsub(/.*\/app\/models\//, '').gsub('.rb', '') }
       model_constants = sanitized_model_paths.map do |path|
         path.split('/').map { |token| token.camelize }.join('::').constantize
@@ -28,7 +18,7 @@ module Jobbr
       model_constants.select { |model| superclasses(model).include?(::Ohm::Model) }
 
       if parent
-        model_constants.select { |model| superclasses(model).include?(parent) }
+        model_constants.select { |model| model.included_modules.include?(parent) }
       else
         model_constants
       end
@@ -47,10 +37,6 @@ module Jobbr
         super_classes << klass
       end
       super_classes
-    end
-
-    def model_directory
-      "#{Rails.root}/app/models/**/*.rb"
     end
 
   end
