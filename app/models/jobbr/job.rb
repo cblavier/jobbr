@@ -32,7 +32,7 @@ module Jobbr
     end
 
     def self.run_by_name(name, *args)
-      instance(name).run(args)
+      instance(name).run(*args)
     end
 
     def self.run(*args)
@@ -61,7 +61,7 @@ module Jobbr
       Job.find(type: class_name).first
     end
 
-    def run(params, delayed = true)
+    def run(params = {}, delayed = true)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
       if delayed && self.delayed && !Rails.env.test?
         self.delay.inner_run(job_run.id, params)

@@ -30,7 +30,7 @@ module Jobbr
     it "consistently pass params to jobs" do
       params = {foo: 1, bar: 2}
       DelayedJobs::DummyJob.any_instance.expects(:perform).with(instance_of(Jobbr::Run), params)
-      DelayedJobs::DummyJob.run(params)
+      DelayedJobs::DummyJob.run(params, false)
     end
 
   end
