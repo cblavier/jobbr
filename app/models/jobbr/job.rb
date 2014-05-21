@@ -36,7 +36,7 @@ module Jobbr
     end
 
     def self.run(*args)
-      instance.run(args)
+      instance.run(*args)
     end
 
     def self.description(desc = nil)

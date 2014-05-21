@@ -27,5 +27,11 @@ module Jobbr
       }.to change { Job.all.count + Run.all.count + LogMessage.all.count }.to(0)
     end
 
+    it "consistently pass params to jobs" do
+      params = {foo: 1, bar: 2}
+      DelayedJobs::DummyJob.any_instance.expects(:perform).with(instance_of(Jobbr::Run), params)
+      DelayedJobs::DummyJob.run(params)
+    end
+
   end
 end
