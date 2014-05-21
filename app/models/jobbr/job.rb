@@ -1,6 +1,3 @@
-require 'jobbr/logger'
-require 'jobbr/ohm'
-
 module Jobbr
 
   class Job < ::Ohm::Model

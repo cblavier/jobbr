@@ -1,4 +1,4 @@
-require 'chronic_duration'
-require 'haml'
-
-Ohm.redis = Redis::Namespace.new(:jobbr, :redis => Ohm.redis)
+require 'ohm'
+require 'ohm/contrib'
+require 'jobbr/logger'
+require 'jobbr/ohm'

@@ -1,2 +1,4 @@
-require 'chronic_duration'
-require 'haml'
+require 'ohm'
+require 'ohm/contrib'
+require 'jobbr/logger'
+require 'jobbr/ohm'

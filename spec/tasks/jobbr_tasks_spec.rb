@@ -31,9 +31,9 @@ describe 'jobbr_tasks' do
   describe 'job sweeping' do
 
     before do
-      job = ScheduledJobs::DummyJob.instance
-      3.times { Jobbr::Run.create(job: job, status: :running, started_at: Time.now) }
-      2.times { Jobbr::Run.create(job: job, status: :success, started_at: Time.now) }
+      ::Jobbr.send(:remove_const, :Job)
+      3.times { Jobbr::Run.create(status: :running, started_at: Time.now) }
+      2.times { Jobbr::Run.create(status: :success, started_at: Time.now) }
     end
 
     it 'marks running jobs as failed' do
