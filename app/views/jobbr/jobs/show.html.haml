@@ -16,6 +16,7 @@
       %th= t('.status')
       %th= t('.last_run')
       %th= t('.duration')
+      %th &nbsp;
 
   %tbody
     - @runs.each do |run|
@@ -29,4 +30,4 @@
           .btn-toolbar
             .btn-group
               = link_to job_run_path(@job, run), class: 'btn see-run', title: t('.see_run') do
-                %i.icon-download
+                = fa_icon 'download'

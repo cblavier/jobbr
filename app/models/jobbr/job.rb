@@ -61,10 +61,19 @@ module Jobbr
       Job.find(type: class_name).first
     end
 
+    # overriding Ohm find to get Sidekiq to find job instances
+    def self.find(id)
+      if id.instance_of?(Hash)
+        super
+      elsif job = Jobbr::Job[id]
+        job.send(:typed_self)
+      end
+    end
+
     def run(params = {}, delayed = true)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
       if delayed && self.delayed && !Rails.env.test?
-        self.delay.inner_run(job_run.id, params)
+        typed_self.delay.inner_run(job_run.id, params)
       else
         self.inner_run(job_run.id, params)
       end
@@ -154,6 +163,7 @@ module Jobbr
       handle_process_interruption(job_run, ['TERM', 'INT'])
 
       begin
+        job_run.logger.debug("Starting with params #{params.inspect}")
         perform(job_run, params)
         job_run.status = :success
         job_run.progress = 100
@@ -179,7 +189,7 @@ module Jobbr
     # working around lack of polymorphism in Ohm
     # using type attributed to get a typed instance
     def typed_self
-      @typed_self ||= Object::const_get(self.type).new
+      @typed_self ||= Object::const_get(self.type).new(id: self.id)
     end
 
   end

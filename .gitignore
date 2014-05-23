@@ -9,3 +9,4 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 *.gem
 coverage
+.idea

@@ -31,7 +31,6 @@ describe 'jobbr_tasks' do
   describe 'job sweeping' do
 
     before do
-      ::Jobbr.send(:remove_const, :Job)
       3.times { Jobbr::Run.create(status: :running, started_at: Time.now) }
       2.times { Jobbr::Run.create(status: :success, started_at: Time.now) }
     end

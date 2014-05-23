@@ -25,7 +25,7 @@ module Jobbr
     end
 
     def display_scheduling(job)
-      every = job.class.every
+      every = job.every
       if every
         scheduling = ChronicDuration.output(every[0])
         if every[1] && !every[1].empty?

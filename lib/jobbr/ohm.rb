@@ -24,10 +24,9 @@ module Jobbr
       end
     end
 
-    # Return i list of classes (will not require all model dependencies)
+    # Return a list of model descriptions (will not require all model dependencies)
     def model_descriptions(model_kind)
       return unless block_given?
-      mock_job
 
       dependencies = ['Jobbr::Job']
 
@@ -68,20 +67,6 @@ module Jobbr
         super_classes << klass
       end
       super_classes
-    end
-
-    # Mock Jobbr::Job which avoids to load the Mongoid stack
-    def mock_job
-      c = Class.new do
-        def self.field(*args); end
-        def self.default_scope(*args); end
-        def self.description(desc = nil)
-          @description = desc if desc
-          @description
-        end
-      end
-      ::Jobbr.send(:remove_const, :Job)
-      ::Jobbr.const_set 'Job', c
     end
 
   end

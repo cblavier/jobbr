@@ -11,7 +11,7 @@ module Jobbr
 
       job = DelayedJobs::DummyJob.instance
       job.runs.count.should == 1
-      job.runs.first.messages.count.should == 1
+      job.runs.first.messages.count.should == 2
     end
 
     it 'does not create duplicated name jobs' do
