@@ -27,6 +27,7 @@ PATH
       sidekiq-delay
       therubyracer
       turbolinks
+      whenever
 
 GEM
   remote: http://rubygems.org/
