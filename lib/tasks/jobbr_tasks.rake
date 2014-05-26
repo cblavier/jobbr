@@ -17,7 +17,6 @@ unless ENV['HEROKU']
       #  info[:dependencies].each { |lib| load lib }
       #  info[:klass_name].constantize.run
       #end
-      puts "declaring #{model.task_name}"
       desc model.description
       task model.task_name => :environment do
         model.run
