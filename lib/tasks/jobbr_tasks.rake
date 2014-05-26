@@ -7,16 +7,7 @@ unless ENV['HEROKU']
 
   namespace :jobbr do
 
-    #::Rails.application.eager_load!
-
     Jobbr::Ohm.models(Jobbr::Scheduled).each do |model|
-      # dynamically create a rake task for each individual Jobbr::ScheduledJob
-      #::Rails.application.eager_load!
-      #desc info[:desc]
-      #task info[:name] => :environment do
-      #  info[:dependencies].each { |lib| load lib }
-      #  info[:klass_name].constantize.run
-      #end
       desc model.description
       task model.task_name => :environment do
         model.run

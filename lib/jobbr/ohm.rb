@@ -9,7 +9,7 @@ module Jobbr
     # Return all Ohm models.
     # You can also pass a module class to get all models including that module
     def models(parent = nil)
-      model_paths = Dir["#{Rails.root}/app/models/**/*.rb"]
+      model_paths = Dir["#{Rails.root}/app/models/*_jobs/*.rb"]
       model_paths.each{ |path| require path }
       sanitized_model_paths = model_paths.map { |path| path.gsub(/.*\/app\/models\//, '').gsub('.rb', '') }
       model_constants = sanitized_model_paths.map do |path|
