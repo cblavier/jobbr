@@ -33,7 +33,7 @@ module Jobbr
 
       # load all the classes for the specific kind
       list = Dir[Rails.root.join('app', 'models', model_kind.to_s.pluralize, '*.rb')].map do |file|
-        require file
+        #require file
         klass = "#{model_kind.to_s.pluralize.camelize}::#{File.basename(file, '.rb').camelize}".constantize
         dependencies << klass.name
         {
@@ -53,7 +53,7 @@ module Jobbr
       # clean our Job mock and make sure to unload its children as well
       dependencies.reverse.each do |name|
         module_name, klass_name = name.split('::')
-        module_name.constantize.send(:remove_const, klass_name.to_sym)
+        #module_name.constantize.send(:remove_const, klass_name.to_sym)
       end
 
     end
