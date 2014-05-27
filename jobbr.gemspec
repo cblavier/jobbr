@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.summary     = 'Rails engine to manage jobs.'
   s.description = 'Rails engine to manage and supervise your batch jobs. Based on sidekiq.'
 
-  s.files         = `git ls-files`.split('\n')
-  s.test_files    = `git ls-files -- spec/*`.split('\n')
-  s.executables   = `git ls-files -- bin/*`.split('\n').map{ |f| File.basename(f) }
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- spec/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'rails', '>= 4.0.0'
