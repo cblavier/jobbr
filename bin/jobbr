@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+require File.expand_path('config/environment')
+
+opt_parser = OptionParser.new do |opts|
+  opts.banner = 'Usage: jobbr [job_name]'
+
+  opts.on('-v', '--version') do
+    puts "Jobbr v#{Jobbr::VERSION}"
+    exit
+  end
+
+  opts.on('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+
+end
+
+opt_parser.parse!
+
+if ARGV.length == 1
+  unless ARGV[0].start_with?('scheduled_jobs')
+    ARGV[0] = "scheduled_jobs/#{ARGV[0]}"
+  end
+  Jobbr::Job.run_by_name(ARGV[0])
+else
+  puts opt_parser
+end
+

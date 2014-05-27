@@ -1,4 +1,4 @@
-require "jobbr/ohm.rb"
+require 'jobbr/ohm.rb'
 
 namespace :jobbr do
 

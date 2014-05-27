@@ -27,13 +27,8 @@ module Jobbr
         @heroku_priority
       end
 
-      def task_name(with_namespace = false)
-        task_name = name.demodulize.underscore
-        if with_namespace
-          "jobbr:#{task_name}"
-        else
-          task_name
-        end
+      def task_name
+        name.demodulize.underscore
       end
 
     end
