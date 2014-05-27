@@ -2,8 +2,6 @@
 
 require 'optparse'
 
-require File.expand_path('config/environment')
-
 opt_parser = OptionParser.new do |opts|
   opts.banner = 'Usage: jobbr [job_name]'
 
@@ -22,6 +20,7 @@ end
 opt_parser.parse!
 
 if ARGV.length == 1
+  require File.expand_path('config/environment')
   unless ARGV[0].start_with?('scheduled_jobs')
     ARGV[0] = "scheduled_jobs/#{ARGV[0]}"
   end
