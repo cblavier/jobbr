@@ -9,12 +9,11 @@ Gem::Specification.new do |s|
   s.authors     = ['Christian Blavier']
   s.email       = ['cblavier@gmail.com']
   s.homepage    = 'https://github.com/cblavier/jobbr'
-  s.summary     = 'Rails supervision UI for your Cron jobs and your Delayed Jobs.'
-  s.description = 'Jobbr provideds a convenient framework and UI to make your Cron jobs and Scheduled Jobs more manageable.'
+  s.summary     = 'Rails engine to manage and supervise your batch jobs. Based on sidekiq.'
 
   s.files         = `git ls-files`.split('\n')
   s.test_files    = `git ls-files -- spec/*`.split('\n')
-  s.executables   = ['jobbr']
+  s.executables   << 'jobbr'
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'rails', '>= 4.0.0'
