@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'font-awesome-rails'
   s.add_runtime_dependency 'turbolinks'
   s.add_runtime_dependency 'whenever'
+  s.add_runtime_dependency 'kaminari'
 
   # Backend
   s.add_runtime_dependency 'redis'

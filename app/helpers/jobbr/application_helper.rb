@@ -14,7 +14,7 @@ module Jobbr
     def status_icon(job_status)
       css_class = "job-status #{job_status}"
       if job_status == :waiting
-        fa_icon 'circle-blank', class: css_class
+        fa_icon 'circle-o', class: css_class
       elsif job_status == :running
         fa_icon 'refresh', class: "#{css_class} fa-spin"
       elsif job_status == :success

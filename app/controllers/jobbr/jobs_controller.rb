@@ -1,3 +1,5 @@
+require 'jobbr/ohm_pagination'
+
 module Jobbr
 
   class JobsController < Jobbr::ApplicationController
@@ -9,7 +11,7 @@ module Jobbr
 
     def show
       if @job = Job.by_name(params[:id])
-        @runs = @job.ordered_runs
+        @runs = Jobbr::OhmPagination.new(@job.runs).sort_by(:started_at).order('ALPHA DESC').per(10).page(params[:page])
         @last_run = @job.last_run
       end
     end
