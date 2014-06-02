@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bootstrap-sass'
   s.add_runtime_dependency 'font-awesome-rails'
   s.add_runtime_dependency 'turbolinks'
-  s.add_runtime_dependency 'whenever'
   s.add_runtime_dependency 'kaminari'
 
   # Backend
@@ -39,6 +38,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ohm-contrib'
   s.add_runtime_dependency 'sidekiq', '>= 3.0.0'
   s.add_runtime_dependency 'sidekiq-delay'
+  s.add_runtime_dependency 'whenever'
   s.add_runtime_dependency 'require_all'
 
 end

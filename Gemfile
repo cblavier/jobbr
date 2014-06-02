@@ -19,7 +19,6 @@ gem 'kaminari'
 
 # Backend
 gem 'redis'
-gem 'redis-namespace'
 gem 'ohm'
 gem 'ohm-contrib'
 gem 'sidekiq'

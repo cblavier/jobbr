@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'sidekiq/delay'
 
 module Jobbr
 

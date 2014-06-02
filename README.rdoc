@@ -44,15 +44,15 @@ Use provided generators to create a first scheduled job
 
 It will create a namespaced model as a well as a Whenever configuration file.
 
-Provided you fill in description and scheduling attributes in the model, you will be able to see it in rake tasks:
+Provided you fill in description and scheduling attributes in the model, you will be able to see it in jobbr tasks:
 
-    $> rake -T | grep jobbr
-    rake jobbr:dummy_job  # A dummy Job
+    $> bundle exec jobbr --list
+    bundle exec jobbr dummy_job  # A dummy Job
 
 And to see it in your crontab preview:
 
     $> whenever
-    30 5 * * * /bin/bash -l -c 'cd /Users/cblavier/code/my_app && RAILS_ENV=production bundle exec rake jobbr:dummy_job >> /Users/cblavier/code/my_app/log/cron.log 2>&1'
+    30 5 * * * /bin/bash -l -c 'cd /Users/cblavier/code/my_app && RAILS_ENV=production bundle exec jobbr dummy_job >> /Users/cblavier/code/my_app/log/cron.log 2>&1'
 
 === Heroku Scheduled Jobs
 
@@ -64,9 +64,6 @@ Then you will need to manually add jobs to the Heroku scheduler console
 
 {<img src="http://cl.ly/image/2N1T1l1w2c28/Capture%20d%E2%80%99%C3%A9cran%202013-07-09%20%C3%A0%2022.18.40.png" width='400'>}[http://cl.ly/image/2N1T1l1w2c28]
 
-You also need to add an environment variable to let Jobbr know it's running on Heroku
-
-    heroku config:add HEROKU=true
 
 === Delayed Jobs
 
