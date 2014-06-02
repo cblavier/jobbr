@@ -27,7 +27,7 @@ module Jobbr
     def display_scheduling(job)
       every = job.every
       if every
-        scheduling = ChronicDuration.output(every[0])
+        scheduling = every[0].is_a?(Fixnum) ? ChronicDuration.output(every[0]) : every[0].to_s
         if every[1] && !every[1].empty?
           scheduling = "#{scheduling} at #{every[1][:at]}"
         end
