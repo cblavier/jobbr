@@ -1,5 +1,3 @@
-require 'jobbr/ohm_pagination'
-
 module Jobbr
 
   class JobsController < Jobbr::ApplicationController

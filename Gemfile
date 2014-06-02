@@ -15,6 +15,7 @@ gem 'less-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'turbolinks'
+gem 'kaminari'
 
 # Backend
 gem 'redis'

@@ -32,7 +32,7 @@ feature 'Job list' do
     first('.table.scheduled-jobs tbody tr').should have_selector('i.failed')
   end
 
-  it "show all runs for a specific job" do
+  it 'show all runs for a specific job' do
     Timecop.travel(5.minutes.ago)
     Jobbr::Run.create(status: :failed,  started_at: Time.now, job: ScheduledJobs::DummyJob.instance)
     Timecop.return
@@ -46,7 +46,7 @@ feature 'Job list' do
     find('.table tbody').should have_selector('tr', count: 3)
   end
 
-  it "shows a specific run" do
+  it 'shows a specific run' do
     visit jobbr_path
     assert_title 'Job list'
 

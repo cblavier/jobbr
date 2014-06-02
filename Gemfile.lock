@@ -249,6 +249,7 @@ DEPENDENCIES
   haml
   jobbr!
   jquery-rails
+  kaminari
   launchy
   less-rails
   mocha

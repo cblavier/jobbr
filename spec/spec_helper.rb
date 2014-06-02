@@ -47,7 +47,7 @@ RSpec.configure do |config|
   end
 
   def clean_redis
-    Ohm.redis.call("KEYS", "Jobbr::*").each{|key| Ohm.redis.call('DEL', key)}
+    Ohm.redis.call('KEYS', 'Jobbr::*').each{ |key| Ohm.redis.call('DEL', key) }
   end
 
 end
