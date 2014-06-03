@@ -1,5 +1,4 @@
 require 'active_support/concern'
-require 'sidekiq/delay'
 
 module Jobbr
 
@@ -9,7 +8,7 @@ module Jobbr
 
     included do
 
-      include Sidekiq::Delay
+      include Sidekiq::Extensions::ActiveRecord
 
     end
 

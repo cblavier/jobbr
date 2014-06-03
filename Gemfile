@@ -22,7 +22,6 @@ gem 'redis'
 gem 'ohm'
 gem 'ohm-contrib'
 gem 'sidekiq'
-gem 'sidekiq-delay', github: 'cblavier/sidekiq-delay'
 gem 'whenever'
 gem 'require_all'
 
