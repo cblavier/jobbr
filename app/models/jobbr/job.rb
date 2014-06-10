@@ -73,7 +73,7 @@ module Jobbr
     def run(params = {}, delayed = true)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
       if delayed && self.delayed && !Rails.env.test?
-        typed_self.delay.inner_run(job_run.id, params)
+        typed_self.delay(retry: 0, backtrace: true).inner_run(job_run.id, params)
       else
         self.inner_run(job_run.id, params)
       end
