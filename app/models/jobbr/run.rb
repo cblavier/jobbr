@@ -33,7 +33,7 @@ module Jobbr
       self.messages.sort_by(:created_at, order: 'ALPHA ASC')
     end
 
-    def after_delete
+    def before_delete
       self.messages.each(&:delete)
     end
 
