@@ -80,7 +80,7 @@ module Jobbr
     it 'creates log messages when logging' do
       ScheduledJobs::LoggingJob.run
       last_job_run = ScheduledJobs::LoggingJob.instance.runs.first
-      last_job_run.should have(3).messages
+      last_job_run.messages.size.should == 3
       last_job_run.messages[2].kind.should be :debug
       last_job_run.messages[2].message.should == 'foo'
       last_job_run.messages[3].kind.should be :error

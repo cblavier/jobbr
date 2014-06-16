@@ -30,7 +30,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.99'
   gem 'mocha'
   gem 'generator_spec'
   gem 'codeclimate-test-reporter', require: 'nil'

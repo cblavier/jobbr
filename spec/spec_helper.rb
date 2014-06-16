@@ -50,4 +50,6 @@ RSpec.configure do |config|
     Ohm.redis.call('KEYS', 'Jobbr::*').each{ |key| Ohm.redis.call('DEL', key) }
   end
 
+  config.infer_spec_type_from_file_location!
+
 end
