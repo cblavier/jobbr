@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/phuongnd08/ohm.git
+  revision: fd019bfc22b399a7b14a6a3f70627a4a900806ef
+  specs:
+    ohm (2.0.0)
+      msgpack
+      nido
+      redic
+
 PATH
   remote: .
   specs:
@@ -123,10 +132,6 @@ GEM
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     numerizer (0.1.1)
-    ohm (2.0.0)
-      msgpack
-      nido
-      redic
     ohm-contrib (2.0.0)
       ohm (~> 2.0.0)
     poltergeist (1.5.1)
@@ -247,7 +252,7 @@ DEPENDENCIES
   launchy
   less-rails
   mocha
-  ohm
+  ohm!
   ohm-contrib
   poltergeist
   rails (>= 4.0.0)

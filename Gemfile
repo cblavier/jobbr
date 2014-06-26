@@ -19,7 +19,7 @@ gem 'kaminari'
 
 # Backend
 gem 'redis'
-gem 'ohm'
+gem 'ohm', github: 'phuongnd08/ohm'
 gem 'ohm-contrib'
 gem 'sidekiq'
 gem 'whenever'
