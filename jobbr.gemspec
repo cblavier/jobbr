@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
 
   # Backend
   s.add_runtime_dependency 'redis'
-  s.add_runtime_dependency 'ohm'
+  s.add_runtime_dependency 'ohm', '>= 2.0.1'
   s.add_runtime_dependency 'ohm-contrib'
   s.add_runtime_dependency 'sidekiq', '>= 3.0.0'
   s.add_runtime_dependency 'whenever'
