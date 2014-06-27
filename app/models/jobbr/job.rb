@@ -2,7 +2,7 @@ module Jobbr
 
   class Job < ::Ohm::Model
 
-    MAX_RUN_PER_JOB = 500
+    MAX_RUN_PER_JOB = 5000
 
     include ::Ohm::Timestamps
     include ::Ohm::DataTypes
@@ -148,7 +148,11 @@ module Jobbr
     def cap_runs!
       runs_count = self.runs.count
       if runs_count > max_run_per_job
-        runs.sort_by(:started_at, order: 'ALPHA ASC', limit: [0, runs_count - max_run_per_job]).each(&:delete)
+        runs.sort_by(:started_at, order: 'ALPHA ASC', limit: [0, runs_count - max_run_per_job]).each do |run|
+          if run.status == :failed || run.status == :success
+            run.delete
+          end
+        end
       end
     end
 
