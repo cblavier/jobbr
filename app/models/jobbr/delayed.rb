@@ -12,6 +12,15 @@ module Jobbr
 
     end
 
+    module ClassMethods
+
+      def queue(queue = nil)
+        @queue = queue.to_sym if queue
+        @queue
+      end
+
+    end
+
   end
 
 end

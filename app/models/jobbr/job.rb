@@ -44,11 +44,6 @@ module Jobbr
       @description
     end
 
-    def self.queue(queue = nil)
-      @queue = queue.to_sym if queue
-      @queue
-    end
-
     def self.delayed
       find(delayed: true)
     end
