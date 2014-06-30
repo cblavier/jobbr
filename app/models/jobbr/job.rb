@@ -44,6 +44,11 @@ module Jobbr
       @description
     end
 
+    def self.queue(queue = nil)
+      @queue = queue.to_sym if queue
+      @queue
+    end
+
     def self.delayed
       find(delayed: true)
     end
@@ -73,7 +78,9 @@ module Jobbr
     def run(params = {}, delayed = true)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
       if delayed && self.delayed && !Rails.env.test?
-        typed_self.delay(retry: 0, backtrace: true).inner_run(job_run.id, params)
+        delayed_options = { retry: 0, backtrace: true }
+        delayed_options[:queue] = typed_self.queue if typed_self.queue
+        typed_self.delay(delayed_options).inner_run(job_run.id, params)
       else
         self.inner_run(job_run.id, params)
       end

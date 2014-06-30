@@ -4,6 +4,8 @@ module DelayedJobs
 
     include Jobbr::Delayed
 
+    queue :critical
+
     def perform(run, params)
       run.logger.debug 'job is running'
     end
