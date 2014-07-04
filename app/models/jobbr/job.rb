@@ -2,7 +2,7 @@ module Jobbr
 
   class Job < ::Ohm::Model
 
-    MAX_RUN_PER_JOB = 5000
+    MAX_RUN_PER_JOB = 500
 
     include ::Ohm::Timestamps
     include ::Ohm::DataTypes
