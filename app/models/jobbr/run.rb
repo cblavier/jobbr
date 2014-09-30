@@ -25,6 +25,18 @@ module Jobbr
       end
     end
 
+    def name
+      job.type.demodulize.underscore.gsub(/_job$/, '')
+    end
+
+    def to_hash
+      super.tap do |hash|
+        %w(name status result progress).each do |key|
+          hash[key.to_sym] = send(key.to_sym)
+        end
+      end
+    end
+
     def to_param
       id
     end
