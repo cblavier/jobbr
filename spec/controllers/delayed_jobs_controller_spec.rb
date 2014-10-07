@@ -24,6 +24,7 @@ module Jobbr
       get :show, {id: run.id}
 
       json = JSON.parse(response.body)
+      json['name'].should == 'dummy'
       json['status'].should == 'success'
       json['progress'].should == 100
       json['result'].should be_nil

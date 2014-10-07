@@ -10,7 +10,7 @@ module Jobbr
 
     def show
       job_run = Run[params[:id]]
-      render json: { status: job_run.status, result: job_run.result, progress: job_run.progress }
+      render json: job_run.to_hash
     end
 
   end
