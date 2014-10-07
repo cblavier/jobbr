@@ -21,10 +21,16 @@ opt_parser.parse!
 
 if ARGV.length == 1
   require File.expand_path('config/environment')
-  unless ARGV[0].start_with?('scheduled_jobs')
-    ARGV[0] = "scheduled_jobs/#{ARGV[0]}"
+  param = ARGV[0]
+  if param.start_with?('heroku:')
+    frequency = param.split(':').last
+    Jobbr::Ohm.models(Jobbr::Scheduled).select{|c| c.heroku_frequency.try(:to_sym) == frequency.to_sym }.sort{|a,b| b.heroku_priority <=> a.heroku_priority}.each(&:run)
+  elsif param.start_with?('scheduled_jobs')
+    Jobbr::Job.run_by_name(param)
+  else
+    Jobbr::Job.run_by_name("scheduled_jobs/#{param}")
   end
-  Jobbr::Job.run_by_name(ARGV[0])
+
 else
   puts opt_parser
 end

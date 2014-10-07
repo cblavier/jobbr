@@ -58,7 +58,7 @@ And to see it in your crontab preview:
 
 You can also use Heroku Scheduler to run jobs. Unfortunately Heroku does not provide Cron-scheduling, but let you run jobs every 10 minutes, every hour or every day.
 
-Jobbr provides you with 3 tasks 'jobbr:heroku:minutely', 'jobbr:heroku:hourly' and 'jobbr:heroku:daily', that will run any Job with `heroku_run` directive.
+Jobbr provides you with 3 tasks 'bundle exec jobbr heroku:minutely', 'bundle exec jobbr heroku:hourly' and 'bundle exec jobbr heroku:daily', that will run any Job with `heroku_run` directive.
 
 Then you will need to manually add jobs to the Heroku scheduler console
 

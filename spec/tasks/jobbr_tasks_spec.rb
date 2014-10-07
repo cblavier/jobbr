@@ -8,26 +8,6 @@ describe 'jobbr_tasks' do
     Rake::Task.define_task(:environment)
   end
 
-  describe 'dynamic jobbr tasks declaration' do
-
-    xit 'should define jobbr tasks' do
-      task_names = Rake.application.tasks.map(&:name)
-      task_names.should include('jobbr:dummy_heroku_job')
-      task_names.should include('jobbr:dummy_scheduled_job')
-      task_names.should include('jobbr:logging_job')
-      task_names.should include('jobbr:dummy_heroku_job')
-    end
-
-    xit 'actually run jobs' do
-      expect {
-        Rake.application.invoke_task 'jobbr:logging_job'
-      }.to change { Jobbr::Run.all.count }.from(0).to(1)
-
-      Jobbr::Run.all.first.status.should be :success
-    end
-
-  end
-
   describe 'job sweeping' do
 
     before do
