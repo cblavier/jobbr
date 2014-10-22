@@ -3,7 +3,7 @@ class Jobbr::ScheduledJobConfigGenerator < Rails::Generators::Base
 
   def copy_config_file
     copy_file "schedule.rb", "config/schedule.rb"
-    generate 'jobbr:initializer' unless Rails.env.test?
+    generate 'jobbr:initializer' unless (Rails.env.test? || Rails.env.ci?)
   end
 
 end
