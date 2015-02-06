@@ -6,7 +6,7 @@ module Jobbr
 
     it 'creates a new job by its name' do
       expect {
-        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/dummy_job', {})
       }.to change{ Job.count }.by(1)
 
       job = DelayedJobs::DummyJob.instance
@@ -16,14 +16,14 @@ module Jobbr
 
     it 'does not create duplicated name jobs' do
       expect {
-        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
-        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
-        Job.run_by_name('delayed_jobs/dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/dummy_job', {})
+        Job.run_by_name('delayed_jobs/dummy_job', {})
+        Job.run_by_name('delayed_jobs/dummy_job', {})
       }.to change{ Job.all.count }.by(1)
 
       expect {
-        Job.run_by_name('delayed_jobs/other_dummy_job', {}, false)
-        Job.run_by_name('delayed_jobs/other_dummy_job', {}, false)
+        Job.run_by_name('delayed_jobs/other_dummy_job', {})
+        Job.run_by_name('delayed_jobs/other_dummy_job', {})
       }.to change{ Job.all.count }.by(1)
     end
 
