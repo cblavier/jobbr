@@ -71,6 +71,7 @@ module Jobbr
     end
 
     def run(params = {}, options = {})
+      options = { delayed: true }.merge(options)
       job_run = Run.create(status: :waiting, started_at: Time.now, job: self)
       if options[:delayed] && self.delayed && !Rails.env.test? && !Rails.env.ci?
         delayed_options = { retry: 0, backtrace: true }
