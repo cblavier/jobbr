@@ -19,6 +19,11 @@ module Jobbr
         @queue
       end
 
+      def throttle(options = nil)
+        @throttle_options = options if options
+        @throttle_options
+      end
+
     end
 
   end

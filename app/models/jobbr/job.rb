@@ -76,6 +76,7 @@ module Jobbr
       if options[:delayed] && self.delayed && !Rails.env.test? && !Rails.env.ci?
         delayed_options = { retry: 0, backtrace: true }
         delayed_options[:queue] = typed_self.class.queue if typed_self.class.queue
+        delayed_options[:throttle] = typed_self.class.throttle if typed_self.class.throttle
         typed_self.delay(delayed_options.merge(options)).inner_run(job_run.id, params)
       else
         self.inner_run(job_run.id, params)
