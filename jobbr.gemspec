@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'less-rails'
   s.add_runtime_dependency 'bootstrap-sass'
   s.add_runtime_dependency 'font-awesome-rails'
-  s.add_runtime_dependency 'turbolinks'
   s.add_runtime_dependency 'kaminari'
 
   # Backend

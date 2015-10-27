@@ -18,7 +18,6 @@ PATH
       sass-rails (>= 4.0.2)
       sidekiq (>= 3.0.0)
       therubyracer
-      turbolinks
       whenever
 
 GEM
@@ -212,8 +211,6 @@ GEM
     tilt (1.4.1)
     timecop (0.7.1)
     timers (1.1.0)
-    turbolinks (2.4.0)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicorn (4.8.3)
@@ -256,6 +253,8 @@ DEPENDENCIES
   spring-commands-rspec
   therubyracer
   timecop
-  turbolinks
   unicorn
   whenever
+
+BUNDLED WITH
+   1.10.6

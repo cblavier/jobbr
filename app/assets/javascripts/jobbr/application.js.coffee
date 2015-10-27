@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require turbolinks
 
 #= require_self
 
@@ -20,11 +19,11 @@ enableAutoRefresh = (force = false) ->
   if force || (getURLParameter('refresh') == '1')
     if toggleRefreshButton()
       timeout = setTimeout(->
-        Turbolinks.visit("#{document.location.pathname}?refresh=1")
+        location.assign("#{document.location.pathname}?refresh=1")
       , autoRefreshInterval)
     else
       clearTimeout(timeout)
-      Turbolinks.visit(document.location.pathname)
+      location.assign(document.location.pathname)
 
 init = ->
   scrollToBottom($('.logs'))
