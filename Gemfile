@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'chronic_duration'
 gem 'sass-rails'
+gem 'sass', '3.6.0'
 gem 'coffee-rails'
 gem 'therubyracer'
 gem 'less-rails'
@@ -19,7 +20,7 @@ gem 'kaminari'
 
 # Backend
 gem 'redis'
-gem 'ohm', '>= 2.0.1'
+gem 'ohm', '2.0.1'
 gem 'ohm-contrib'
 gem 'sidekiq'
 gem 'whenever'
@@ -30,7 +31,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 2.99'
+  gem 'rspec-rails'
   gem 'mocha'
   gem 'generator_spec'
   gem 'codeclimate-test-reporter', require: 'nil'

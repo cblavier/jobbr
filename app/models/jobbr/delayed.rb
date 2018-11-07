@@ -6,12 +6,6 @@ module Jobbr
 
     extend ActiveSupport::Concern
 
-    included do
-
-      include Sidekiq::Extensions::ActiveRecord
-
-    end
-
     module ClassMethods
 
       def queue(queue = nil)

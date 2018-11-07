@@ -10,8 +10,8 @@ module Jobbr
       }.to change{ Job.count }.by(1)
 
       job = DelayedJobs::DummyJob.instance
-      job.runs.count.should == 1
-      job.runs.first.messages.count.should == 2
+      expect(job.runs.count).to be(1)
+      expect(job.runs.first.messages.count).to be(2)
     end
 
     it 'does not create duplicated name jobs' do

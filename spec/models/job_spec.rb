@@ -9,12 +9,12 @@ module Jobbr
       other_dummy_job = DelayedJobs::OtherDummyJob.instance
 
       Run::create(job: dummy_job)
-      dummy_job.runs.size.should == 1
-      other_dummy_job.runs.size.should == 0
+      expect(dummy_job.runs.size).to be(1)
+      expect(other_dummy_job.runs.size).to be(0)
 
       Run::create(job: other_dummy_job)
-      dummy_job.runs.size.should == 1
-      other_dummy_job.runs.size.should == 1
+      expect(dummy_job.runs.size).to be(1)
+      expect(other_dummy_job.runs.size).to be(1)
     end
 
     it "destroys related runs and logs when deleted" do

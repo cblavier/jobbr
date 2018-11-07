@@ -15,21 +15,20 @@ feature 'Job list' do
   it 'shows all scheduled jobs' do
     visit jobbr_path
     assert_title 'Job list'
-    find('.table.scheduled-jobs tbody').should have_selector('tr', count: 2)
+    expect(find('.table.scheduled-jobs tbody')).to have_selector('tr', count: 2)
   end
-
 
   it 'shows all delayed jobs' do
     visit jobbr_path
     assert_title 'Job list'
-    find('.table.delayed-jobs tbody').should have_selector('tr', count: 2)
+    expect(find('.table.delayed-jobs tbody')).to have_selector('tr', count: 2)
   end
 
   it 'shows correct status for each job' do
     Jobbr::Run.create(status: :failed,  started_at: Time.now, job: ScheduledJobs::DummyJob.instance)
     visit jobbr_path
     assert_title 'Job list'
-    first('.table.scheduled-jobs tbody tr').should have_selector('i.failed')
+    expect(first('.table.scheduled-jobs tbody tr')).to have_selector('i.failed')
   end
 
   it 'show all runs for a specific job' do
@@ -43,7 +42,7 @@ feature 'Job list' do
 
     first('.scheduled-jobs a.all-runs').click
     assert_title 'Dummy job'
-    find('.table tbody').should have_selector('tr', count: 3)
+    expect(find('.table tbody')).to have_selector('tr', count: 3)
   end
 
   it 'shows a specific run' do
@@ -55,7 +54,7 @@ feature 'Job list' do
   end
 
   def assert_title(title)
-    find('ol.breadcrumb li.active').should have_content(title)
+    expect(find('ol.breadcrumb li.active')).to have_content(title)
   end
 
 end

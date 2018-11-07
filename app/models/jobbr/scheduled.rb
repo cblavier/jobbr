@@ -31,6 +31,10 @@ module Jobbr
         name.demodulize.underscore
       end
 
+      def delayed
+        false
+      end
+
     end
 
   end
