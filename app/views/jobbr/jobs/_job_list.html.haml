@@ -22,6 +22,6 @@
           .btn-toolbar
             .btn-group
               = link_to job_path(job), class: 'btn all-runs', title: t('.see_all_runs') do
-                = fa_icon 'list'
+                = icon 'list'
               = link_to job_run_path(job, job.last_run), class: 'btn last-run', title: t('.see_last_run') do
-                = fa_icon 'download'
+                = icon 'download'

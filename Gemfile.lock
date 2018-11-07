@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jobbr (2.0.0)
+    jobbr (2.1.0)
       bootstrap-sass
       chronic_duration
       coffee-rails
@@ -106,6 +106,8 @@ GEM
     ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
+    font-awesome-sassc (4.7.1)
+      sass (>= 3.2)
     generator_spec (0.9.4)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
@@ -233,7 +235,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    sass (3.6.0)
+    sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -244,6 +246,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.0.0)
+      ffi (~> 1.9.6)
+      rake
     sidekiq (5.2.3)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
@@ -297,7 +302,7 @@ DEPENDENCIES
   chronic_duration
   codeclimate-test-reporter
   coffee-rails
-  font-awesome-rails
+  font-awesome-sassc
   generator_spec
   haml
   jobbr!
@@ -313,8 +318,8 @@ DEPENDENCIES
   redis
   require_all
   rspec-rails
-  sass (= 3.6.0)
   sass-rails
+  sassc
   sidekiq
   spring-commands-rspec
   therubyracer
