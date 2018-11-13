@@ -1,10 +1,15 @@
 require 'active_support/concern'
+require 'sidekiq/extensions/active_record'
 
 module Jobbr
 
   module Delayed
 
     extend ActiveSupport::Concern
+
+    included do
+      include Sidekiq::Extensions::ActiveRecord
+    end
 
     module ClassMethods
 
