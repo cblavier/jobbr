@@ -10,11 +10,13 @@ module Jobbr
 
     attribute :type
     attribute :delayed, Type::Boolean
+    attribute :scheduled, Type::Boolean
 
     collection :runs, 'Jobbr::Run'
 
     index :type
     index :delayed
+    index :scheduled
 
     def self.instance(instance_class_name = nil)
       if instance_class_name
@@ -26,7 +28,8 @@ module Jobbr
       job = Job.find(type: job_class.to_s).first
       if job.nil?
         delayed = job_class.included_modules.include?(Jobbr::Delayed)
-        job = Job.create(type: job_class.to_s, delayed: delayed)
+        scheduled = job_class.included_modules.include?(Jobbr::Scheduled)
+        job = Job.create(type: job_class.to_s, delayed: delayed, scheduled: scheduled)
       end
       job
     end
@@ -49,7 +52,7 @@ module Jobbr
     end
 
     def self.scheduled
-      find(delayed: false)
+      find(scheduled: true)
     end
 
     def self.count
