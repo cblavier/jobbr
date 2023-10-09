@@ -25,8 +25,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'chronic_duration'
   s.add_runtime_dependency 'sass-rails', '>= 4.0.2'
   s.add_runtime_dependency 'coffee-rails'
-  s.add_runtime_dependency 'therubyracer'
-  s.add_runtime_dependency 'less-rails'
   s.add_runtime_dependency 'bootstrap-sass'
   s.add_runtime_dependency 'font-awesome-rails'
   s.add_runtime_dependency 'turbolinks'
