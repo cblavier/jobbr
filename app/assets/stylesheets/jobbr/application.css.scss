@@ -41,6 +41,7 @@
   font-family: Monaco, 'Courier New';
   height: 200px;
   overflow: auto;
+  resize: vertical;
 
   .kind, .date {
     color: #AAAAAA;
@@ -57,7 +58,6 @@
   &.large {
     height: 600px
   }
-
 }
 
 .table td {
